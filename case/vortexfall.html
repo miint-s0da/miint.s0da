@@ -197,6 +197,23 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 @media(max-width:900px){.txtdec{grid-template-columns:1fr}}
 .next ul.big{grid-template-columns:1fr 1fr;column-gap:28px}
 @media(max-width:760px){.next ul.big{grid-template-columns:1fr}}
+
+/* ---- UX RATIONALE ---- */
+.ux{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:860px){.ux{grid-template-columns:1fr}}
+.ux .hud{display:grid;gap:10px}
+.ux .t{display:flex;gap:12px;align-items:baseline}
+.ux .t b{font:700 11px/1 var(--mono);letter-spacing:.16em;color:var(--cy);white-space:nowrap}
+.ux .t h3{margin:0;font-size:17px}
+.ux .row{display:grid;grid-template-columns:62px 1fr;gap:10px;font-size:14px}
+.ux .row span{font:700 10px/1.9 var(--mono);letter-spacing:.14em;color:var(--sub)}
+.ux .row p{margin:0;color:var(--mut)}
+.ux .row.r p{color:var(--fg)}
+.funnel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 22px}
+.funnel span{padding:10px 14px;border:1px solid var(--line);background:var(--bg2);font-size:13px}
+.funnel span b{display:block;font:700 10px/1.4 var(--mono);letter-spacing:.14em;color:var(--cy)}
+.funnel i{font-style:normal;color:var(--cy)}
+.funnel span.cta{border-color:var(--pk);background:rgba(255,45,170,.1)}.funnel span.cta b{color:var(--pk)}
 </style>
 </head>
 <body>
@@ -204,7 +221,7 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 <header class="bar">
   <div class="wrap">
     <b>CASE STUDY // 03</b>
-    <nav aria-label="케이스 스터디 목차"><a href="#challenge">CHALLENGE</a><a href="#process">PROCESS</a><a href="#decisions">DECISIONS</a><a href="#result">RESULT</a><a href="#tools">TOOLS</a><a href="#next">NEXT</a></nav>
+    <nav aria-label="케이스 스터디 목차"><a href="#challenge">CHALLENGE</a><a href="#ux">UX</a><a href="#process">PROCESS</a><a href="#decisions">DECISIONS</a><a href="#result">RESULT</a><a href="#tools">TOOLS</a><a href="#next">NEXT</a></nav>
     <button class="x" id="close" type="button" aria-label="닫기">✕</button>
   </div>
 </header>
@@ -245,10 +262,48 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
   </div>
 </section>
 
+<!-- UX RATIONALE -->
+<section id="ux">
+  <div class="wrap">
+    <div class="lbl rv">02 <i>//</i> UX RATIONALE</div>
+    <h2 class="rv">WHY THIS <em>LAYOUT</em></h2>
+    <p class="lead rv">원페이지 스크롤을 고른 이유는 런칭 사이트의 목적이 "세계관을 이해시키고 → 사전예약으로 이어지게" 하는 하나의 흐름이기 때문이다. 섹션 순서를 이 흐름에 맞춰 배치하고, 긴 페이지에서도 길을 잃지 않도록 탐색 장치를 더했다.</p>
+    <div class="funnel rv">
+      <span><b>HOOK</b>인트로 · 히어로</span><i>→</i><span><b>UNDERSTAND</b>01 세계 · 02 에너지</span><i>→</i><span><b>ATTACH</b>03 캐릭터</span><i>→</i><span><b>IMAGINE</b>04 플레이 · 05 시스템</span><i>→</i><span><b>FEEL</b>미디어</span><i>→</i><span class="cta"><b>ACTION</b>사전예약</span>
+    </div>
+    <div class="ux">
+      <div class="hud rv"><div class="t"><b>UX 01</b><h3>긴 페이지에서 현재 위치 알기</h3></div>
+        <div class="row"><span>ISSUE</span><p>섹션이 9개인 원페이지라, 스크롤하다 보면 지금 어디쯤인지, 무엇이 남았는지 알기 어렵다.</p></div>
+        <div class="row r"><span>DESIGN</span><p>상단 메뉴에 섹션 번호(01~06)를 붙이고, 오른쪽에 현재 섹션 표시 점을 고정했다. 배경 하늘의 시각(04:12 → 06:40)도 진행률 역할을 한다.</p></div>
+        <div class="row"><span>EFFECT</span><p>원하는 섹션으로 바로 이동할 수 있고, 남은 분량을 감각적으로 알 수 있다.</p></div></div>
+      <div class="hud rv"><div class="t"><b>UX 02</b><h3>설명 대신 직접 조작</h3></div>
+        <div class="row"><span>ISSUE</span><p>"같은 좌표, 다른 법칙"이라는 세계관은 글로 읽으면 추상적이다.</p></div>
+        <div class="row r"><span>DESIGN</span><p>두 세계 비교는 드래그 슬라이더, 에너지 상태는 STABLE / UNSTABLE 토글, 스킬은 카드 선택으로 바꿨다.</p></div>
+        <div class="row"><span>EFFECT</span><p>읽지 않고 손으로 비교하며 이해한다. 세계관의 핵심 설정을 한 번의 동작으로 전달한다.</p></div></div>
+      <div class="hud rv"><div class="t"><b>UX 03</b><h3>진입 장벽 줄이기</h3></div>
+        <div class="row"><span>ISSUE</span><p>인트로 연출과 사운드는 몰입을 주지만, 다시 방문한 사람에게는 기다림과 소음이 된다.</p></div>
+        <div class="row r"><span>DESIGN</span><p>인트로는 언제든 SKIP, 재방문 시 30일간 자동 생략. 사운드는 입장 후에만 재생하고 배경음악과 효과음을 따로 끌 수 있게 했다. 히어로에서는 H(HUD 숨김) · T(트레일러) · Enter(사전예약) 단축키를 지원한다.</p></div>
+        <div class="row"><span>EFFECT</span><p>처음 온 사람은 연출을 경험하고, 다시 온 사람은 바로 원하는 내용으로 간다.</p></div></div>
+      <div class="hud rv"><div class="t"><b>UX 04</b><h3>목표 행동을 항상 가까이</h3></div>
+        <div class="row"><span>ISSUE</span><p>쇼케이스의 최종 목표는 사전예약인데, 페이지 맨 끝에만 두면 도중에 이탈한다.</p></div>
+        <div class="row r"><span>DESIGN</span><p>상단 고정 메뉴에 PRE-REGISTER 버튼을 항상 노출하고, 히어로에도 사전예약·트레일러 버튼을 바로 배치했다.</p></div>
+        <div class="row"><span>EFFECT</span><p>어느 위치에서든 한 번의 클릭으로 사전예약에 도달한다.</p></div></div>
+      <div class="hud rv"><div class="t"><b>UX 05</b><h3>정보 위계 정리</h3></div>
+        <div class="row"><span>ISSUE</span><p>게임 정보가 많아 섹션마다 텍스트 양이 쉽게 늘어난다.</p></div>
+        <div class="row r"><span>DESIGN</span><p>섹션마다 [영문 라벨 → 큰 제목 → 한 줄 요약 → 상세 패널] 순서로 통일했다.</p></div>
+        <div class="row"><span>EFFECT</span><p>훑어보는 사람은 제목과 요약만, 관심 있는 사람은 패널까지 보는 2단계 탐색이 된다.</p></div></div>
+      <div class="hud rv"><div class="t"><b>UX 06</b><h3>기기별 경험</h3></div>
+        <div class="row"><span>ISSUE</span><p>PC용 HUD와 넓은 비교 화면을 모바일에 그대로 두면 화면이 복잡하고 조작이 어렵다.</p></div>
+        <div class="row r"><span>DESIGN</span><p>모바일은 HUD 요소를 줄이고 세로 한 열로 재배치했다. 화면이 좁을 때 소용돌이·캐릭터가 잘리지 않게 구도를 따로 잡고, 앱 목업 페이지로 모바일 경험을 따로 보여준다.</p></div>
+        <div class="row"><span>EFFECT</span><p>작은 화면에서도 핵심 비주얼과 조작이 유지된다.</p></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- 2. PROCESS -->
 <section id="process">
   <div class="wrap">
-    <div class="lbl rv">02 <i>//</i> PROCESS</div>
+    <div class="lbl rv">03 <i>//</i> PROCESS</div>
     <h2 class="rv">HOW IT <em>EVOLVED</em></h2>
     <p class="lead rv">완성된 화면은 처음 모습과 많이 다르다. 이름, 첫 화면, 로고, 캐릭터 제작 방식이 어떻게 바뀌었는지 단계별로 정리했다.</p>
 
@@ -294,7 +349,7 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 <!-- 3. DECISIONS -->
 <section id="decisions">
   <div class="wrap">
-    <div class="lbl rv">03 <i>//</i> DECISIONS</div>
+    <div class="lbl rv">04 <i>//</i> DECISIONS</div>
     <h2 class="rv">WHAT I <em>CHOSE</em> AND WHY</h2>
     <div class="dec">
       <div class="dc hud rv">
@@ -316,7 +371,7 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 <!-- 4. RESULT -->
 <section id="result">
   <div class="wrap">
-    <div class="lbl rv">04 <i>//</i> RESULT</div>
+    <div class="lbl rv">05 <i>//</i> RESULT</div>
     <h2 class="rv">THE <em>LAUNCH SITE</em></h2>
     <div class="flow rv">
       <div>INTRO<small>접속 연출</small></div><div>HERO<small>균열 루프</small></div><div>01 WORLD<small>두 세계 비교</small></div><div>02 ENERGY<small>상태 전환</small></div><div>03 KAEL<small>캐릭터·스킬</small></div><div>04 LOOP<small>플레이 흐름</small></div><div>05 SYSTEM<small>싱크·공명</small></div><div>MEDIA<small>트레일러·OST</small></div><div>PRE-REG<small>사전예약</small></div>
@@ -336,7 +391,7 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 <!-- 5. TOOLS -->
 <section id="tools">
   <div class="wrap">
-    <div class="lbl rv">05 <i>//</i> TOOLS &amp; PROCESS</div>
+    <div class="lbl rv">06 <i>//</i> TOOLS &amp; PROCESS</div>
     <h2 class="rv">HOW IT WAS <em>BUILT</em></h2>
     <div class="hud rv" style="padding:8px clamp(14px,2.4vw,24px)">
       <table class="tools">
@@ -363,7 +418,7 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 <section class="end" id="next">
   <div class="wrap">
     <div class="hud next rv sweep">
-      <div><div class="lbl" style="margin-bottom:10px">06 <i>//</i> NEXT MISSION</div><h3>앞으로 확장할 것</h3>
+      <div><div class="lbl" style="margin-bottom:10px">07 <i>//</i> NEXT MISSION</div><h3>앞으로 확장할 것</h3>
         <ul class="big">
           <li>스킬 영상 6종 완성 (훈련실 배경 기준)</li>
           <li>KAEL 포함 캐릭터 10인 상세 페이지</li>
