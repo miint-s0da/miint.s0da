@@ -306,53 +306,17 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 .cform input,.cform textarea{color:var(--fg);border:1px solid var(--line)}
 .cform input:focus,.cform textarea:focus{border-color:var(--acc)}
 
-/* ===== PLANNING NOTE: 프로젝트마다 다른 형태·모션 ===== */
-.plan{margin:2px 0 24px;font-size:13px;line-height:1.65;word-break:keep-all}
-.plan dl{margin:0;display:grid;gap:8px}
-.plan dl>div{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:baseline}
-.plan dt{font:700 10.5px/1.6 var(--f-mono);letter-spacing:.14em;color:var(--acc)}
-.plan dd{margin:0;color:var(--fg)}
-.plan-f{margin:14px 0 8px;font:700 10.5px/1 var(--f-mono);letter-spacing:.14em;color:var(--acc)}
-.plan ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.plan li{display:grid;grid-template-columns:96px 1fr;gap:10px;color:var(--mut)}
-.plan li b{font:600 10.5px/1.7 var(--f-mono);letter-spacing:.08em;color:var(--fg)}
-.plan-h{margin-bottom:12px}.plan-h span{font:700 10.5px/1 var(--f-mono);letter-spacing:.18em}
-/* 01 UNI+ON: 팝 스티커 카드 — 튀어오르기 */
-.plan-pop{padding:18px 20px;border:2px solid var(--fg);border-radius:16px;background:rgb(var(--bgv)/.88);box-shadow:6px 6px 0 var(--acc);transform-origin:20% 100%}
-.plan-pop .plan-h span{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--acc);color:var(--bg)}
-.plan-pop.in{animation:planPop .6s cubic-bezier(.34,1.56,.64,1) both}
-@keyframes planPop{0%{transform:scale(.86) rotate(-2deg);opacity:0}100%{transform:none;opacity:1}}
-/* 02 PIXELINK: 픽셀 대화창 — 계단식 펼침 */
-.plan-px{padding:18px 20px;background:rgb(var(--bgv)/.9);border:3px solid var(--acc);clip-path:polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px))}
-.plan-px .plan-h span{color:var(--acc)}.plan-px .plan-h span::before{content:"▶ ";animation:pxBlink 1s steps(1) infinite}
-.plan-px li b::before{content:"■ ";color:var(--acc)}
-.plan-px.in{animation:pxOpen .7s steps(7) both}
-@keyframes pxOpen{0%{clip-path:inset(0 0 100% 0)}100%{clip-path:inset(0)}}
-@keyframes pxBlink{50%{opacity:0}}
-/* 03 VORTEXFALL: HUD 브리핑 — 스캔 라인 */
-.plan-hud{position:relative;padding:18px 20px;background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 7%,transparent),transparent 60%),rgb(var(--bgv)/.86);border:1px solid color-mix(in srgb,var(--acc) 45%,transparent);overflow:hidden}
-.plan-hud::before,.plan-hud::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--acc)}
-.plan-hud::before{left:-1px;top:-1px;border-right:0;border-bottom:0}.plan-hud::after{right:-1px;bottom:-1px;border-left:0;border-top:0}
-.plan-hud .plan-h span{color:var(--acc)}.plan-hud .plan-h span::after{content:" // CLASSIFIED";color:var(--mut)}
-.plan-hud .scan{position:absolute;left:0;right:0;top:-30%;height:30%;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--acc) 22%,transparent),transparent);pointer-events:none;opacity:0}
-.plan-hud.in .scan{animation:hudScan 1.4s ease-out both}
-.plan-hud.in dl,.plan-hud.in ol,.plan-hud.in .plan-f{animation:hudIn .9s .35s both}
-@keyframes hudScan{0%{top:-30%;opacity:1}100%{top:110%;opacity:0}}
-@keyframes hudIn{0%{opacity:0;filter:blur(4px)}100%{opacity:1;filter:none}}
-@media(max-width:819px){.plan li,.plan dl>div{grid-template-columns:84px 1fr}
+@media(max-width:819px){
   /* 모바일 히어로: 소개 문구 박스가 버튼을 덮지 않게 흐름 배치 */
   #hero .intro{position:static;transform:none;left:auto;bottom:auto;width:auto;max-width:none;margin:6px 0 0}}
-@media(prefers-reduced-motion:reduce){.plan.in,.plan.in *{animation:none!important}}
 
-/* 모바일: 기획 노트는 접어 두고 버튼으로 펼침 (도형 레이어 위로) */
-.plan-tg{display:none}
-@media(max-width:819px){
-  .plan-tg{display:inline-flex;gap:8px;align-items:center;margin:0 0 18px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:rgb(var(--bgv)/.92);color:var(--fg);font:700 11px/1 var(--f-mono);letter-spacing:.12em;cursor:pointer;position:relative;z-index:25}
-  .plan-tg[aria-expanded="true"] span{display:inline-block;transform:rotate(45deg)}
-  .plan{display:none;position:relative;z-index:25;background-color:rgb(var(--bgv)/.98)!important}
-  .plan.open{display:block}
-  .proj.plan-on{z-index:22}
-}
+
+/* ===== CASE STUDY 오버레이 ===== */
+.cta.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.cta.ghost:hover{border-color:var(--acc)}
+#caseOverlay{position:fixed;inset:0;z-index:10001;background:#0E1030;opacity:0;transform:translateY(24px);transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}
+#caseOverlay.on{opacity:1;transform:none}
+#caseOverlay iframe{width:100%;height:100%;border:0;display:block}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -466,13 +430,6 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
       <p class="tag">게임·웹툰·애니메이션·캐릭터·굿즈·크리에이터를 한곳에서 탐색하는 문화 IP 플랫폼</p>
       <p class="desc">굵은 외곽선과 오프셋 그림자의 팝 그래픽으로 흩어진 문화 콘텐츠를 하나의 탐색 체계로 묶었습니다. 메인과 서브 페이지, 장바구니까지 이어지는 사용자 흐름을 설계하고 데스크톱부터 모바일까지 같은 경험으로 구현했습니다.</p>
       <ul class="tags"><li>브랜드 UX</li><li>팝 그래픽</li><li>반응형 웹</li></ul>
-      <button class="plan-tg" type="button" aria-expanded="false">기획 노트 보기 <span aria-hidden="true">+</span></button>
-      <div class="plan plan-pop">
-        <div class="plan-h"><span>PLANNING NOTE</span></div>
-        <dl><div><dt>WHY</dt><dd>게임·웹툰·애니메이션·굿즈가 각기 다른 곳에 흩어져 있어, 좋아하는 IP를 한곳에서 탐색하기 어렵다는 문제에서 출발했습니다.</dd></div><div><dt>GOAL</dt><dd>흩어진 문화 콘텐츠를 하나의 탐색 흐름으로 묶는 플랫폼</dd></div></dl>
-        <p class="plan-f">FOCUS</p>
-        <ol><li><b>IDENTITY</b><span>굵은 외곽선·오프셋 그림자의 팝 그래픽 시스템</span></li><li><b>FLOW</b><span>메인 → 서브 → 장바구니로 이어지는 사용자 흐름</span></li><li><b>RESPONSIVE</b><span>데스크톱부터 모바일까지 같은 경험</span></li></ol>
-      </div>
       <div class="foot"><span class="state">완료</span><a class="cta" href="https://unionverse.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">→</span></a></div>
     </div>
   </div>
@@ -489,13 +446,6 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
       <p class="tag">치이(CHI:EE)와 픽셀 세계를 잇는 오리지널 캐릭터 IP 브랜드 사이트</p>
       <p class="desc">UNI+ON의 히어로 캐릭터에서 출발한 독립 브랜드입니다. 레트로 픽셀 감성에 파스텔 네온을 더한 BI와 세계관을 설계하고, 픽셀 커서와 호버 인터랙션으로 캐릭터의 개성을 사이트 전체에 입혔습니다.</p>
       <ul class="tags"><li>캐릭터 IP</li><li>레트로 픽셀</li><li>인터랙션</li></ul>
-      <button class="plan-tg" type="button" aria-expanded="false">기획 노트 보기 <span aria-hidden="true">+</span></button>
-      <div class="plan plan-px">
-        <div class="plan-h"><span>QUEST LOG</span></div>
-        <dl><div><dt>WHY</dt><dd>UNI+ON의 히어로 캐릭터를 독립 IP로 키워, 캐릭터 하나로 브랜드와 굿즈까지 확장할 수 있는지 실험하고 싶었습니다.</dd></div><div><dt>GOAL</dt><dd>캐릭터 치이(CHI:EE)와 픽셀 세계관을 경험하는 브랜드 사이트</dd></div></dl>
-        <p class="plan-f">FOCUS</p>
-        <ol><li><b>BI</b><span>레트로 픽셀 + 파스텔 네온 컬러 시스템</span></li><li><b>INTRO</b><span>카세트 → VHS → CRT로 이어지는 진입 연출</span></li><li><b>INTERACTION</b><span>픽셀 커서와 호버로 캐릭터 성격 표현</span></li></ol>
-      </div>
       <div class="foot"><span class="state">제작 중</span><a class="cta" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">→</span></a></div>
     </div>
   </div>
@@ -511,14 +461,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
       <p class="tag">오리지널 SF 판타지 게임 IP 및 브랜드 쇼케이스</p>
       <p class="desc">차원 균열로 분리된 두 세계와 인공 생명체 카엘을 중심으로, 세계관·원초 에너지·캐릭터·게임 시스템을 시네마틱 원페이지 웹사이트로 구현한 오리지널 게임 IP 프로젝트.</p>
       <ul class="tags"><li>게임 IP</li><li>시네마틱 트레일러</li><li>원페이지</li></ul>
-      <button class="plan-tg" type="button" aria-expanded="false">기획 노트 보기 <span aria-hidden="true">+</span></button>
-      <div class="plan plan-hud"><i class="scan" aria-hidden="true"></i>
-        <div class="plan-h"><span>MISSION BRIEFING</span></div>
-        <dl><div><dt>WHY</dt><dd>게임 팬은 출시 전 세계관에서 먼저 생긴다고 보고, 정보를 나열하는 홍보 페이지 대신 체험하는 런칭 사이트를 기획했습니다.</dd></div><div><dt>GOAL</dt><dd>스크롤하는 동안 두 세계 안에 들어가 있는 느낌을 주는 쇼케이스</dd></div></dl>
-        <p class="plan-f">FOCUS</p>
-        <ol><li><b>WORLD</b><span>같은 장소의 두 세계를 비교하는 슬라이더</span></li><li><b>TIME</b><span>스크롤에 따라 새벽 하늘이 바뀌는 시간 연출</span></li><li><b>ASSET</b><span>AI 비주얼과 직접 만든 테마 음악·효과음</span></li></ol>
-      </div>
-      <div class="foot"><span class="state">제작 중</span><a class="cta" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">→</span></a></div>
+      <div class="foot"><span class="state">제작 중</span><a class="cta" href="case/vortexfall.html" data-case="vortexfall">CASE STUDY <span aria-hidden="true">→</span></a><a class="cta ghost" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a></div>
     </div>
   </div>
 </section>
@@ -2501,13 +2444,17 @@ document.querySelector('.intro-replay').addEventListener('click', function(){
   location.reload();
 });
 </script>
+<div id="caseOverlay" hidden><iframe id="caseFrame" title="CASE STUDY"></iframe></div>
 <script>
-/* PLANNING NOTE: 화면에 들어오면 프로젝트별 등장 모션 */
-(function(){var els=document.querySelectorAll('.plan');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.35});els.forEach(function(e){io.observe(e)})})();
-</script>
-<script>
-document.addEventListener('click',function(e){var b=e.target.closest('.plan-tg');if(!b)return;var pl=b.nextElementSibling;var o=pl.classList.toggle('open');b.setAttribute('aria-expanded',o);var sec=b.closest('.proj');if(sec)sec.classList.toggle('plan-on',o);if(o){pl.classList.remove('in');void pl.offsetWidth;pl.classList.add('in')}});
+/* CASE STUDY: 프로젝트 상세를 오버레이로 열기 (#case/이름 으로 새로고침 유지) */
+(function(){var ov=document.getElementById('caseOverlay'),fr=document.getElementById('caseFrame'),savedY=0,cur='';
+function open(name,keep){if(!name)return;if(cur!==name){fr.src='case/'+name+'.html';cur=name}else{try{fr.contentWindow.postMessage({type:'case-top'},'*')}catch(e){}}
+  savedY=scrollY;ov.hidden=false;requestAnimationFrame(function(){ov.classList.add('on')});document.documentElement.style.overflow='hidden';if(!keep)try{history.replaceState(null,'','#case/'+name)}catch(e){}}
+function close(){ov.classList.remove('on');setTimeout(function(){ov.hidden=true},350);document.documentElement.style.overflow='';try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}window.scrollTo({top:savedY,behavior:'instant'})}
+document.addEventListener('click',function(e){var a=e.target.closest('a[data-case]');if(!a)return;e.preventDefault();open(a.getAttribute('data-case'))});
+addEventListener('message',function(e){if(e.data&&e.data.type==='case-close')close()});
+addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)close()});
+var m=location.hash.match(/^#case\/([\w-]+)$/);if(m)open(m[1],true);})();
 </script>
 </body>
 </html>
