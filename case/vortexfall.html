@@ -151,6 +151,52 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 .go{display:inline-flex;align-items:center;gap:12px;padding:18px 28px;background:var(--cy);color:var(--bg);font:700 13px/1 var(--mono);letter-spacing:.14em;text-decoration:none;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);transition:background .2s}
 .go:hover{background:var(--fg)}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.sweep.in::after{animation:none}}
+
+/* ---- PROCESS ---- */
+.step3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+@media(max-width:860px){.step3{grid-template-columns:1fr}}
+.st{position:relative;margin:0;background:var(--bg2);border:1px solid var(--line)}
+.st img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.st.tall img{aspect-ratio:3/4;object-position:top}
+.st figcaption{padding:12px 14px 14px;font-size:13px;color:var(--mut)}
+.st figcaption b{display:block;font:700 10.5px/1.5 var(--mono);letter-spacing:.14em;color:var(--cy);margin-bottom:3px}
+.st .no{position:absolute;left:10px;top:10px;font:700 10px/1 var(--mono);letter-spacing:.14em;padding:6px 8px;background:rgba(14,16,48,.9);border:1px solid var(--line)}
+.st.now{border-color:var(--cy);box-shadow:0 0 0 1px var(--cy),0 10px 40px rgba(76,201,240,.18)}
+.st.now .no{background:var(--cy);color:var(--bg);border-color:var(--cy)}
+.arrowrow{display:none}
+.pstep{margin-top:clamp(36px,5vw,56px)}
+.pstep>h3{display:flex;align-items:baseline;gap:12px;font-size:20px;margin-bottom:6px}
+.pstep>h3 small{font:700 11px/1 var(--mono);letter-spacing:.2em;color:var(--pk)}
+.pstep>p{margin:0 0 18px;color:var(--mut);max-width:820px}
+.idgrid{display:grid;grid-template-columns:.8fr 1.2fr 1fr;gap:14px;align-items:stretch}
+@media(max-width:900px){.idgrid{grid-template-columns:1fr}}
+.idgrid .st img{aspect-ratio:auto;height:100%;max-height:340px;object-fit:contain;background:#0a0b1c}
+.pipe{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center}
+.pipe .ar{font:700 22px/1 var(--mono);color:var(--cy)}
+@media(max-width:760px){.pipe{grid-template-columns:1fr}.pipe .ar{transform:rotate(90deg);justify-self:center}}
+.pipe .st img{aspect-ratio:3/4;object-fit:cover;object-position:top}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
+.pair .st img{aspect-ratio:3/4;object-fit:cover;object-position:top}
+/* ---- DECISIONS ---- */
+.dec{display:grid;gap:16px}
+.dc{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(16px,2.6vw,28px);align-items:center}
+@media(max-width:900px){.dc{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vs figure{margin:0;position:relative;border:1px solid var(--line)}
+.vs img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.vs figcaption{position:absolute;left:8px;top:8px;font:700 10px/1 var(--mono);letter-spacing:.12em;padding:6px 8px;background:rgba(14,16,48,.9)}
+.vs .x2{opacity:.55;filter:grayscale(.5)}
+.vs .x2 figcaption{color:var(--mut);text-decoration:line-through}
+.vs .ok figcaption{background:var(--cy);color:var(--bg)}
+.chose{display:grid;gap:8px;font-size:14px}
+.chose .q{font:700 10.5px/1 var(--mono);letter-spacing:.18em;color:var(--pk)}
+.chose h3{font-size:19px;margin:2px 0 4px}
+.chose p{margin:0;color:var(--mut)}
+.chose .a{padding:12px 14px;border-left:3px solid var(--cy);background:rgba(76,201,240,.07);color:var(--fg)}
+.txtdec{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.txtdec{grid-template-columns:1fr}}
+.next ul.big{grid-template-columns:1fr 1fr;column-gap:28px}
+@media(max-width:760px){.next ul.big{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -158,7 +204,7 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 <header class="bar">
   <div class="wrap">
     <b>CASE STUDY // 03</b>
-    <nav aria-label="케이스 스터디 목차"><a href="#concept">CONCEPT</a><a href="#intent">INTENT</a><a href="#design">DESIGN</a><a href="#output">OUTPUT</a><a href="#tools">TOOLS</a><a href="#solve">PROBLEM</a></nav>
+    <nav aria-label="케이스 스터디 목차"><a href="#challenge">CHALLENGE</a><a href="#process">PROCESS</a><a href="#decisions">DECISIONS</a><a href="#result">RESULT</a><a href="#tools">TOOLS</a><a href="#next">NEXT</a></nav>
     <button class="x" id="close" type="button" aria-label="닫기">✕</button>
   </div>
 </header>
@@ -180,108 +226,113 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
   </div>
 </section>
 
-<!-- 1. CONCEPT -->
-<section id="concept">
+<!-- 1. CHALLENGE -->
+<section id="challenge">
   <div class="wrap">
-    <div class="lbl rv">01 <i>//</i> CONCEPT</div>
-    <h2 class="rv">SAME COORDINATES, <em>DIFFERENT LAWS</em></h2>
+    <div class="lbl rv">01 <i>//</i> CHALLENGE</div>
+    <h2 class="rv">AI로 만든 조각들을 <em>하나의 세계</em>로</h2>
     <div class="split">
       <div class="rv">
-        <p class="quote">하나의 근원에서 갈라진 두 세계,<br>하늘에 <span>소용돌이 균열</span>이 열린다.</p>
-        <p class="lead" style="margin:0">첨단 유리 도시인 <b>현실 세계</b>와 눈과 결정으로 뒤덮인 <b>이면 세계</b>. 두 세계를 잇는 형태 없는 <b>근원 에너지</b>는 이면 세계에서 원석 형태의 결정으로 굳는다. 경계가 무너지기 시작한 세계에 균열 대응 요원 KAEL이 투입된다.</p>
-        <div class="cmp">
-          <figure><img src="vortexfall/world_real.webp" alt="현실 세계: 하이테크 유리 도시" loading="lazy"><figcaption>REALITY · GLASS CITY</figcaption></figure>
-          <figure><img src="vortexfall/world_other.webp" alt="이면 세계: 눈과 결정의 도시" loading="lazy"><figcaption>OTHERWORLD · CRYSTAL WINTER</figcaption></figure>
+        <p class="why" style="margin-bottom:18px">게임 팬은 출시 전 <b>세계관과 캐릭터</b>에서 먼저 생긴다. 그래서 정보를 나열하는 홍보 페이지가 아니라, 스크롤하는 동안 <b>그 세계 안에 들어가 있는 런칭 사이트</b>를 목표로 했다.</p>
+        <p class="lead" style="margin:0 0 14px">가장 큰 과제는 AI였다. 이미지와 영상을 생성할 때마다 캐릭터의 얼굴, 색, 분위기가 조금씩 달라졌다. 이 조각들을 <b>"같은 좌표, 다른 법칙"</b>을 가진 하나의 세계로 보이게 만드는 것, 그리고 기획부터 배포까지 혼자 끝까지 연결하는 것이 이 프로젝트의 핵심이었다.</p>
+        <div class="goal"><b>GOAL</b><span>스크롤하는 동안 두 세계 안에 들어가 있는 느낌을 주는 게임 IP 런칭 쇼케이스</span></div>
+      </div>
+      <div class="cmp rv" style="margin-top:0">
+        <figure><img src="vortexfall/world_real.webp" alt="현실 세계: 하이테크 유리 도시" loading="lazy"><figcaption>REALITY · GLASS CITY</figcaption></figure>
+        <figure><img src="vortexfall/world_other.webp" alt="이면 세계: 눈과 결정의 도시" loading="lazy"><figcaption>OTHERWORLD · CRYSTAL WINTER</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="lbl rv">02 <i>//</i> PROCESS</div>
+    <h2 class="rv">HOW IT <em>EVOLVED</em></h2>
+    <p class="lead rv">완성된 화면은 처음 모습과 많이 다르다. 이름, 첫 화면, 로고, 캐릭터 제작 방식이 어떻게 바뀌었는지 단계별로 정리했다.</p>
+
+    <div class="pstep">
+      <h3 class="rv"><small>P1</small>첫 화면의 변화</h3>
+      <p class="rv">처음에는 EVERGLOW라는 이름으로 코드로 그린 실루엣과 결정을 배치했다. 세계관이 "하늘에 열린 균열"로 정리되면서 이름을 VORTEXFALL로 바꾸고, 첫 화면도 세계관의 핵심 사건인 소용돌이를 보여주는 방향으로 다시 만들었다.</p>
+      <div class="step3">
+        <figure class="st rv"><span class="no">V1 · EVERGLOW</span><img src="vortexfall/evo_everglow.webp" alt="초기 EVERGLOW 히어로" loading="lazy"><figcaption><b>코드로 그린 화면</b>이름·톤 미확정. 실루엣과 결정을 코드로 그려 분위기를 잡음</figcaption></figure>
+        <figure class="st rv"><span class="no">V2 · VORTEXFALL</span><img src="vortexfall/evo_back.webp" alt="KAEL 뒷모습 히어로" loading="lazy"><figcaption><b>리네이밍 · 캐릭터 중심</b>KAEL의 뒷모습과 결정으로 "이야기가 시작되는 순간"을 연출</figcaption></figure>
+        <figure class="st now rv"><span class="no">NOW</span><img src="vortexfall/cover.webp" alt="최종 소용돌이 히어로" loading="lazy"><figcaption><b>세계관의 사건을 첫 화면에</b>도시 하늘에 열린 소용돌이 균열을 루프 영상으로 + 게임 HUD</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="pstep">
+      <h3 class="rv"><small>P2</small>아이덴티티 결정</h3>
+      <p class="rv">워드마크는 여러 버전을 같은 배경에 놓고 비교했고, 엠블럼은 소용돌이를 해석하는 방식(날개형·터빈·나선)을 나눠 후보를 만들었다. 작은 크기에서도 읽히는 4날개 소용돌이를 최종으로 골랐다.</p>
+      <div class="idgrid">
+        <figure class="st rv"><span class="no">WORDMARK</span><img src="vortexfall/logo_variants.webp" alt="워드마크 후보 비교" loading="lazy"><figcaption><b>워드마크 후보</b>서체·장식·부제 조합 비교</figcaption></figure>
+        <figure class="st rv"><span class="no">EMBLEM</span><img src="vortexfall/emb_sheet.webp" alt="엠블럼 후보" loading="lazy"><figcaption><b>엠블럼 후보</b>컬러·실루엣 버전으로 크기별 가독성 확인</figcaption></figure>
+        <figure class="st now rv"><span class="no">FINAL</span><img src="vortexfall/logo_final.webp" alt="최종 로고" loading="lazy"><figcaption><b>최종</b>소용돌이 엠블럼을 O 자리에 넣은 메탈 워드마크</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="pstep">
+      <h3 class="rv"><small>P3</small>AI 캐릭터를 사이트에 올리는 과정</h3>
+      <p class="rv">AI 영상은 배경까지 함께 생성되기 때문에 사이트 배경과 어울리지 않았다. 캐릭터를 초록 단색 배경으로 생성하고, 브라우저에서 WebGL로 실시간 배경을 제거해 사이트 위에 캐릭터만 띄웠다.</p>
+      <div class="pipe">
+        <figure class="st rv"><span class="no">01 GENERATE</span><img src="vortexfall/pipe_green.webp" alt="초록 배경으로 생성한 KAEL" loading="lazy"><figcaption><b>초록 배경 생성</b>Kling · 고정 카메라 · 머리카락과 에너지만 움직이는 루프</figcaption></figure>
+        <span class="ar" aria-hidden="true">→</span>
+        <figure class="st rv"><span class="no">02 KEY</span><img src="vortexfall/pipe_key.webp" alt="배경을 제거한 KAEL" loading="lazy"><figcaption><b>배경 제거</b>WebGL 크로마키로 실시간 제거</figcaption></figure>
+        <span class="ar" aria-hidden="true">→</span>
+        <figure class="st now rv"><span class="no">03 SITE</span><img src="vortexfall/pipe_site.webp" alt="사이트에 적용된 KAEL" loading="lazy"><figcaption><b>사이트 적용</b>캐릭터 섹션 배경 위에 합성</figcaption></figure>
+      </div>
+      <p class="rv" style="margin:22px 0 14px;color:var(--mut)">스킬 영상도 같은 방식으로 만들고, 아카이온 본부의 훈련실 배경을 직접 합성해 모든 스킬이 같은 공간에서 보이도록 기준을 정했다.</p>
+      <div class="pair">
+        <figure class="st rv"><span class="no">GREEN</span><img src="vortexfall/q_green.webp" alt="초록 배경 스킬 영상" loading="lazy"><figcaption><b>원본</b>스킬 Q · OVERCLOCK DASH</figcaption></figure>
+        <figure class="st now rv"><span class="no">COMPOSITE</span><img src="vortexfall/q_final.webp" alt="훈련실 배경에 합성한 스킬 영상" loading="lazy"><figcaption><b>훈련실 합성</b>ARKHEON 훈련실 배경 + 발밑 그림자</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. DECISIONS -->
+<section id="decisions">
+  <div class="wrap">
+    <div class="lbl rv">03 <i>//</i> DECISIONS</div>
+    <h2 class="rv">WHAT I <em>CHOSE</em> AND WHY</h2>
+    <div class="dec">
+      <div class="dc hud rv">
+        <div class="vs">
+          <figure class="x2"><img src="vortexfall/char_coat.webp" alt="코트 의상 KAEL" loading="lazy"><figcaption>COAT</figcaption></figure>
+          <figure class="ok"><img src="vortexfall/scr_lifeform.webp" alt="검정 전술 슈트 KAEL" loading="lazy"><figcaption>TACTICAL SUIT</figcaption></figure>
         </div>
+        <div class="chose"><span class="q">DECISION 01 · CHARACTER</span><h3>코트 vs 검정 전술 슈트</h3><p>흰 코트 버전은 화사하지만, 사이트의 어두운 배경 위에서 캐릭터의 실루엣과 시안 라인이 묻혔다.</p><p class="a">균열 대응 요원이라는 정체성과 "인공 신체 = 시안" 컬러 규칙이 가장 잘 드러나는 검정 전술 슈트로 확정. 코트는 다른 의상 후보로 보류.</p></div>
       </div>
-      <div class="kael hud rv sweep">
-        <img src="vortexfall/kael.webp" alt="KAEL: 은백색 포니테일과 검정 전술 슈트의 균열 대응 요원" loading="lazy">
-        <div class="tx"><b>NO.001 · KAEL</b><small>ARKHEON CORP. · FRACTURE RESPONSE · RESONATOR</small><p>인공 생명체이자 근원 에너지와 공명하는 공명자. 은백색 하이 포니테일, 검정 전술 슈트, LX-71V 레이저 사이드암을 고정 외형으로 설계했다.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. INTENT -->
-<section id="intent">
-  <div class="wrap">
-    <div class="lbl rv">02 <i>//</i> PLANNING INTENT</div>
-    <h2 class="rv">WHY A <em>LAUNCH SITE</em></h2>
-    <p class="why rv">게임 팬은 출시 전, <b>세계관과 캐릭터</b>에서 먼저 생긴다. 그래서 게임 정보를 나열하는 홍보 페이지가 아니라 <b>스크롤하는 동안 그 세계 안에 들어가 있는 경험</b>을 목표로 했다. 동시에 하나의 IP를 기획부터 세계관·캐릭터·브랜드·영상·사운드·웹 구현·배포까지 혼자 끝까지 연결해 보는 것이 이 프로젝트의 목적이었다.</p>
-    <div class="cards3">
-      <div class="k rv"><div class="n">01</div><h3>비교한다</h3><p>같은 장소의 현실과 이면 세계를 드래그 슬라이더로 직접 넘겨 보며 "같은 좌표, 다른 법칙"을 체감한다.</p></div>
-      <div class="k rv"><div class="n">02</div><h3>흘러간다</h3><p>스크롤이 곧 시간이다. 새벽 04:12에서 06:40으로 하늘색과 빛 입자가 바뀌며, 스크롤 자체가 이야기 진행이 된다.</p></div>
-      <div class="k rv"><div class="n">03</div><h3>들어간다</h3><p>시스템 경고창과 부팅 로그로 시작하는 접속 연출, 타깃 락온·퀘스트 창 같은 게임 HUD로 게임 안에 접속한 느낌을 준다.</p></div>
-    </div>
-    <div class="goal rv"><b>GOAL</b><span>스크롤하는 동안 두 세계 안에 들어가 있는 느낌을 주는 게임 IP 런칭 쇼케이스</span></div>
-  </div>
-</section>
-
-<!-- 3. DESIGN -->
-<section id="design">
-  <div class="wrap">
-    <div class="lbl rv">03 <i>//</i> DESIGN DEVELOPMENT</div>
-    <h2 class="rv">ONE WORLD, <em>CLEAR RULES</em></h2>
-    <p class="lead rv">AI로 만든 결과물을 하나의 세계로 보이게 하려면, 생성하기 전에 기준이 먼저 있어야 했다. 아이덴티티·컬러·캐릭터·제작 규칙을 먼저 정하고 모든 작업을 그 기준에 맞췄다.</p>
-    <div class="dgrid">
-      <div class="dg hud rv">
-        <h3><small>A</small>IDENTITY</h3>
-        <p>가상 스튜디오 WORLD WEAVER와 VORTEXFALL 로고(메탈·플랫 2종), 소용돌이 엠블럼. 첫 이름 EVERGLOW에서 세계관에 맞게 리네이밍했다.</p>
-        <div class="ident"><img class="em" src="vortexfall/emblem.webp" alt="VORTEXFALL 소용돌이 엠블럼" loading="lazy"><img class="lg" src="vortexfall/logo.webp" alt="VORTEXFALL 로고" loading="lazy"></div>
-      </div>
-      <div class="dg hud rv">
-        <h3><small>B</small>COLOR SYSTEM · PALETTE v2</h3>
-        <p>세계마다 팔레트를 나누고, 사이트 UI 컬러는 따로 정의했다.</p>
-        <div class="pal">
-          <div class="row"><span>SITE UI</span><div class="chips"><i style="background:#0E1030" data-c="#0E1030"></i><i style="background:#14163A" data-c="#14163A"></i><i style="background:#7C4DFF" data-c="#7C4DFF"></i><i style="background:#4CC9F0" data-c="#4CC9F0"></i><i style="background:#F4F4F8" data-c="#F4F4F8"></i></div></div>
-          <div class="row"><span>REALITY</span><div class="chips"><i style="background:#3A86FF" data-c="#3A86FF"></i><i style="background:#00BBF9" data-c="#00BBF9"></i><i style="background:#A0C4FF" data-c="#A0C4FF"></i><i style="background:#C9D1D9" data-c="#C9D1D9"></i><i style="background:#FF2DAA" data-c="#FF2DAA"></i></div></div>
-          <div class="row"><span>OTHERWORLD</span><div class="chips"><i style="background:#6A00FF" data-c="#6A00FF"></i><i style="background:#C77DFF" data-c="#C77DFF"></i><i style="background:#B8B8FF" data-c="#B8B8FF"></i><i style="background:#FFB3C6" data-c="#FFB3C6"></i><i style="background:#F1FAEE" data-c="#F1FAEE"></i></div></div>
-          <div class="row"><span>RIFT GLOW</span><div class="rift" aria-label="#6A00FF에서 #F7C59F로 이어지는 균열 그라데이션"></div></div>
-        </div>
-      </div>
-      <div class="dg hud rv">
-        <h3><small>C</small>CHARACTER &amp; SKILL</h3>
-        <p>KAEL의 외형 기준(헤어·슈트·무기·홀스터)을 문서로 고정하고, 모든 이미지·영상 프롬프트에 같은 문장을 반복해 장면이 달라도 같은 캐릭터로 보이게 했다. 스킬 6종에는 능력의 성격에 따른 컬러 규칙을 정했다.</p>
-        <div class="sk"><span class="c">인공 신체 · CYAN</span><span class="v">공명 · VIOLET</span><span class="b">복합 · BOTH</span></div>
-      </div>
-      <div class="dg hud rv">
-        <h3><small>D</small>PRODUCTION RULES</h3>
-        <ul class="rules">
-          <li><span><b>색</b> 세계별 팔레트를 프롬프트에 말로 풀어 넣는다</span></li>
-          <li><span><b>형태</b> 결정은 깎은 보석이 아닌 원석, 에너지는 형태 없는 플라즈마</span></li>
-          <li><span><b>배경</b> 캐릭터는 초록 단색 배경으로 생성 → 코드에서 실시간 제거</span></li>
-          <li><span><b>카메라</b> 루프 영상은 고정 카메라, 첫 프레임과 마지막 프레임 일치</span></li>
-          <li><span><b>UI</b> 게임 HUD 모티프, 호버는 카드마다 다른 반응으로 설계</span></li>
-        </ul>
+      <div class="txtdec">
+        <div class="hud rv chose"><span class="q">DECISION 02 · SKILL VIDEO</span><h3>일부만 공개 vs 전부 준비 중</h3><p>스킬 6종 중 2종만 영상이 먼저 완성됐다.</p><p class="a">일부만 연결하면 완성도가 들쭉날쭉해 보여, 6종이 같은 배경 기준으로 완성될 때까지 전부 "준비 중"으로 통일.</p></div>
+        <div class="hud rv chose"><span class="q">DECISION 03 · PLAY LOOP</span><h3>카드 + 영상 vs 설명형</h3><p>04 섹션을 카드마다 짧은 인게임 영상을 넣는 형태로 시도했다.</p><p class="a">카드 안에 영상만 들어가 밋밋해 보여 원래 설명형으로 복귀. 섹션 재구성은 다음 과제로 분리.</p></div>
+        <div class="hud rv chose"><span class="q">DECISION 04 · RESPONSIVE</span><h3>일체형 vs 반응형 + 앱 목업</h3><p>PC 화면 안에 모바일 열을 띄우는 일체형 레이아웃도 만들어 봤다.</p><p class="a">게임 쇼케이스는 PC 화면을 넓게 쓰는 게 강점이라 반응형을 유지하고, 모바일은 별도 앱 목업 페이지로 보여주기로 결정.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 4. OUTPUT -->
-<section id="output">
+<!-- 4. RESULT -->
+<section id="result">
   <div class="wrap">
-    <div class="lbl rv">04 <i>//</i> KEY OUTPUT</div>
+    <div class="lbl rv">04 <i>//</i> RESULT</div>
     <h2 class="rv">THE <em>LAUNCH SITE</em></h2>
-    <p class="lead rv">인트로부터 사전예약까지 하나의 흐름으로 이어지는 원페이지 쇼케이스. 섹션마다 다른 인터랙션으로 세계관을 체험하게 했다.</p>
     <div class="flow rv">
       <div>INTRO<small>접속 연출</small></div><div>HERO<small>균열 루프</small></div><div>01 WORLD<small>두 세계 비교</small></div><div>02 ENERGY<small>상태 전환</small></div><div>03 KAEL<small>캐릭터·스킬</small></div><div>04 LOOP<small>플레이 흐름</small></div><div>05 SYSTEM<small>싱크·공명</small></div><div>MEDIA<small>트레일러·OST</small></div><div>PRE-REG<small>사전예약</small></div>
     </div>
     <div class="gal">
-      <figure class="wide rv sweep"><img src="vortexfall/scr_world.webp" alt="01 WORLD: 현실과 이면 세계 비교 슬라이더" loading="lazy"><figcaption><b>01 WORLD</b>같은 장소의 두 세계를 드래그로 비교하는 슬라이더, 타이핑으로 등장하는 세계관 텍스트</figcaption></figure>
-      <figure class="rv"><img src="vortexfall/scr_energy.webp" alt="02 ENERGY: 근원 에너지 분석실" loading="lazy"><figcaption><b>02 ENERGY</b>STABLE / UNSTABLE 전환에 따라 방전·경보·파형이 바뀌는 분석실</figcaption></figure>
-      <figure class="rv"><img src="vortexfall/scr_lifeform.webp" alt="03 CHARACTER: KAEL과 스킬 카드" loading="lazy"><figcaption><b>03 CHARACTER</b>배경을 실시간 제거한 KAEL 루프 영상과 스킬 카드 6종</figcaption></figure>
-      <figure class="rv"><img src="vortexfall/scr_system.webp" alt="05 SYSTEM: 뉴럴 싱크와 결정 공명" loading="lazy"><figcaption><b>05 SYSTEM</b>뉴럴 싱크와 결정 공명 영상, 성장 시스템 콘솔</figcaption></figure>
-      <figure class="rv"><img src="vortexfall/scr_media.webp" alt="MEDIA: 비주얼 아카이브" loading="lazy"><figcaption><b>MEDIA</b>51초 트레일러, OST 플레이어, 시즌 한정을 포함한 월페이퍼 5종</figcaption></figure>
+      <figure class="wide rv sweep"><img src="vortexfall/scr_world.webp" alt="01 WORLD: 현실과 이면 세계 비교 슬라이더" loading="lazy"><figcaption><b>01 WORLD · 비교한다</b>같은 장소의 두 세계를 드래그로 비교. 스크롤에 따라 새벽 하늘이 밝아지는 시간 연출</figcaption></figure>
+      <figure class="rv"><img src="vortexfall/scr_energy.webp" alt="02 ENERGY" loading="lazy"><figcaption><b>02 ENERGY</b>STABLE / UNSTABLE 전환에 따라 방전·경보·파형이 바뀌는 분석실</figcaption></figure>
+      <figure class="rv"><img src="vortexfall/scr_media.webp" alt="MEDIA" loading="lazy"><figcaption><b>MEDIA</b>51초 트레일러, 직접 만든 테마 BGM과 OST 플레이어, 월페이퍼 5종</figcaption></figure>
     </div>
     <div class="devices rv">
       <div class="ph"><img src="vortexfall/m_hero.webp" alt="모바일 히어로 화면" loading="lazy"></div>
       <div class="ph"><img src="vortexfall/m_kael.webp" alt="모바일 캐릭터 화면" loading="lazy"></div>
-      <p>웹과 모바일 반응형 · 앱 목업 페이지에서 WEB / APP 전환 · BGM과 효과음 개별 제어</p>
+      <p>웹 · 모바일 반응형 · 앱 목업 페이지에서 WEB / APP 전환 · BGM과 효과음 개별 제어</p>
     </div>
   </div>
 </section>
-
 <!-- 5. TOOLS -->
 <section id="tools">
   <div class="wrap">
@@ -308,26 +359,21 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
   </div>
 </section>
 
-<!-- 6. PROBLEM SOLVING -->
-<section id="solve">
-  <div class="wrap">
-    <div class="lbl rv">06 <i>//</i> PROBLEM SOLVING</div>
-    <h2 class="rv">ISSUE <em>→</em> SOLUTION</h2>
-    <div class="pb">
-      <div class="hud rv"><h3><small>CASE 01</small>AI 영상 위에 캐릭터만 띄우기</h3><dl><dt>ISSUE</dt><dd>AI 영상은 배경이 함께 생성돼 사이트 배경과 어울리지 않았다.</dd><dt>SOLUTION</dt><dd>캐릭터를 초록 단색 배경으로 생성하고, WebGL로 실시간 크로마키를 적용해 캐릭터만 남겼다.</dd></dl></div>
-      <div class="hud rv"><h3><small>CASE 02</small>반복 재생 시 끊김</h3><dl><dt>ISSUE</dt><dd>루프 영상이 처음으로 돌아가는 순간 화면이 튀었다.</dd><dt>SOLUTION</dt><dd>같은 영상 두 개를 겹쳐 재생하며 교차시켜 이음새를 없앴다.</dd></dl></div>
-      <div class="hud rv"><h3><small>CASE 03</small>장면마다 달라지는 캐릭터</h3><dl><dt>ISSUE</dt><dd>생성할 때마다 얼굴·의상이 조금씩 달라졌다.</dd><dt>SOLUTION</dt><dd>외형 기준 문장과 색 규칙을 모든 프롬프트에 고정하고, 기준 이미지를 시작 프레임으로 사용했다.</dd></dl></div>
-      <div class="hud rv"><h3><small>CASE 04</small>소리 사용성</h3><dl><dt>ISSUE</dt><dd>사운드를 끄면 배경음악과 효과음이 함께 꺼졌다.</dd><dt>SOLUTION</dt><dd>BGM과 효과음을 분리해 각각 켜고 끌 수 있게 했다.</dd></dl></div>
-    </div>
-  </div>
-</section>
-
-<!-- 7. END -->
-<section class="end">
+<!-- 6. NEXT -->
+<section class="end" id="next">
   <div class="wrap">
     <div class="hud next rv sweep">
-      <div><div class="lbl" style="margin-bottom:10px">NEXT MISSION</div><h3>앞으로 확장할 것</h3>
-        <ul><li>스킬 영상 6종 (훈련실 배경 기준)</li><li>KAEL 캐릭터 상세 · 팀 구성 서브 페이지</li><li>트레일러 음악 보완</li></ul></div>
+      <div><div class="lbl" style="margin-bottom:10px">06 <i>//</i> NEXT MISSION</div><h3>앞으로 확장할 것</h3>
+        <ul class="big">
+          <li>스킬 영상 6종 완성 (훈련실 배경 기준)</li>
+          <li>KAEL 포함 캐릭터 10인 상세 페이지</li>
+          <li>세계관·미디어 등 서브 페이지 구축</li>
+          <li>팀 구성 인게임 화면</li>
+          <li>트레일러 영상 마무리</li>
+          <li>테마곡 · 트레일러 OST · 사이트 BGM 정리</li>
+          <li>04 PLAY LOOP 섹션 재구성</li>
+          <li>03 캐릭터 섹션: 캐릭터·스킬 영상 비주얼 재배치와 리디자인</li>
+        </ul></div>
       <a class="go" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a>
     </div>
   </div>
