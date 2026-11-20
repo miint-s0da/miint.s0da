@@ -396,6 +396,13 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 }
 @media(prefers-reduced-motion:reduce){.strip,.s-body,.s-title{transition:none}}.steps em{display:block;margin-top:8px;font:500 11px/1.5 var(--f-mono);font-style:normal;color:var(--mut)}
 .lay>img,.lay>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;background:var(--bg)}
+/* MORE WORKS 타이포 카드 */
+.s-type{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:28px;border:1.5px dashed var(--line);border-radius:10px;background:var(--bg)}
+.s-big{font:800 clamp(6rem,14vw,12rem)/.85 var(--f-display);color:var(--acc)}
+.s-name{font:800 clamp(1.6rem,3vw,2.6rem)/1 var(--f-display);letter-spacing:-.01em}
+.s-slogan{font:600 11px/1 var(--f-mono);letter-spacing:.16em;color:var(--mut)}
+.s-lines{list-style:none;margin:0;padding:0;display:grid;gap:8px;font:600 clamp(13px,1.6vw,16px)/1 var(--f-mono);letter-spacing:.12em;color:var(--fg)}
+.s-lines b{color:var(--acc);font-weight:800}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -461,7 +468,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 <section id="hero">
   <div id="pxgrid" aria-hidden="true"></div>
   <div class="hcard hc1" data-depth="-0.05"><div style="display:flex;justify-content:space-between"><small>LAYER_Z: 04</small><small>●</small></div><b>KINETIC TYPO +<br>SPATIAL MOTION</b></div>
-  <div class="hcard hc2" data-depth="0.04"><small>ARCHIVE // 2026</small><b>4 SELECTED WORKS</b></div>
+  <div class="hcard hc2" data-depth="0.04"><small>ARCHIVE // 2026</small><b>3 SELECTED WORKS</b></div>
 
   <div class="wrap hero-meta">
     <span class="pill">GRAPHIC SYSTEM &amp; INTERACTIVE DESIGN</span>
@@ -479,7 +486,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 
   <div class="wrap hero-foot">
     <div class="btns">
-      <a class="btn fill" href="#p1"><span>VIEW SELECTED WORKS (04)</span><span aria-hidden="true">↓</span></a>
+      <a class="btn fill" href="#p1"><span>VIEW SELECTED WORKS (03)</span><span aria-hidden="true">↓</span></a>
       <a class="btn line" href="#aboutme" data-about="profile">CREATOR PROFILE →</a>
     </div>
     <div class="role">ESTP CREATIVE DIRECTOR · DESIGN TO CODE</div>
@@ -491,12 +498,10 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
     <span>✦ UNI+ON</span><span>// 문화 IP 플랫폼</span>
     <span>✦ PIXELINK</span><span>// 캐릭터 IP 브랜드</span>
     <span>✦ VORTEXFALL</span><span>// 게임 IP 콘셉트</span>
-    <span>✦ GYEOL</span><span>// 스페이스 라이프스타일 · WORK IN PROGRESS</span>
     <span>✦ VISUAL WORLDS IN MOTION</span>
     <span>✦ UNI+ON</span><span>// 문화 IP 플랫폼</span>
     <span>✦ PIXELINK</span><span>// 캐릭터 IP 브랜드</span>
     <span>✦ VORTEXFALL</span><span>// 게임 IP 콘셉트</span>
-    <span>✦ GYEOL</span><span>// 스페이스 라이프스타일 · WORK IN PROGRESS</span>
     <span>✦ VISUAL WORLDS IN MOTION</span>
   </div>
 </div>
@@ -519,7 +524,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 <figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><div class="lay-ph" aria-hidden="true">VISUAL 이미지 자리 · 가로 16:10</div></figure>
 <figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><div class="lay-ph" aria-hidden="true">LIVE 이미지 자리 · 가로 16:10</div></figure>
     </div>
-    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n on" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n" href="#p4" aria-label="PROJECT 04">04</a></nav>
+    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n on" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a></nav>
     <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
@@ -543,7 +548,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 <figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><img src="build/pixelink/pixelink_03_visual.webp" alt="PIXELINK 03 VISUAL — 이전 버전 화면" loading="lazy"></figure>
 <figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><video src="build/pixelink/pixelink_04_live.mp4" poster="build/pixelink/pixelink_04_live.webp" autoplay muted loop playsinline preload="metadata" aria-label="PIXELINK 04 LIVE — 첫 화면 스크롤 영상"></video></figure>
     </div>
-    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n on" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n" href="#p4" aria-label="PROJECT 04">04</a></nav>
+    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n on" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a></nav>
     <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
@@ -566,31 +571,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 <figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><img src="build/vortexfall/vortexfall_03_visual.webp" alt="VORTEXFALL 03 VISUAL — 이전 버전 화면" loading="lazy"></figure>
 <figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><video src="build/vortexfall/vortexfall_04_live.mp4" poster="build/vortexfall/vortexfall_04_live.webp" autoplay muted loop playsinline preload="metadata" aria-label="VORTEXFALL 04 LIVE — 첫 화면 스크롤 영상"></video></figure>
     </div>
-    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n on" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n" href="#p4" aria-label="PROJECT 04">04</a></nav>
-    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
-  </div>
-</section>
-
-<!-- ============== PROJECT 04 · BUILD TRACK (WORK IN PROGRESS) ============== -->
-<section class="track" id="p4" data-ch="4">
-  <div class="stage">
-    <div class="copy">
-      <div class="row"><span class="chip">PROJECT 04</span><span class="cat">스페이스 라이프스타일 · 서비스 웹</span></div>
-      <h3 class="ttl" data-split>GYEOL</h3>
-      <p class="slogan">SPACE, IN YOUR TONE.</p>
-      <p class="tag">개인의 취향에 맞춰 공간의 컬러와 마감재를 제안하는 스페이스 라이프스타일 브랜드</p>
-      <p class="desc">브랜딩과 서비스 기획 및 디자인 진행 중입니다. 컬러와 소재를 고르고, 공간에 적용해 보고, 예상 비용을 확인한 뒤 상담까지 이어지는 서비스형 웹으로 기획하고 있어요.</p>
-      <ul class="tags"><li>컬러 커스터마이저</li><li>공간 시뮬레이터</li><li>견적 계산</li></ul>
-      <div class="foot"><span class="state">WORK IN PROGRESS</span><span class="cta soon">CASE STUDY (추후)</span></div>
-      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
-    </div>
-    <div class="lays">
-<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><div class="lay-ph" aria-hidden="true">SKETCH 이미지 자리 · 가로 16:10</div></figure>
-<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><div class="lay-ph" aria-hidden="true">WIRE 이미지 자리 · 가로 16:10</div></figure>
-<figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><div class="lay-ph" aria-hidden="true">VISUAL 이미지 자리 · 가로 16:10</div></figure>
-<figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><div class="lay-ph" aria-hidden="true">LIVE 이미지 자리 · 가로 16:10</div></figure>
-    </div>
-    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n on" href="#p4" aria-label="PROJECT 04">04</a></nav>
+    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n on" href="#p3" aria-label="PROJECT 03">03</a></nav>
     <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
@@ -601,11 +582,8 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
     <span class="eyebrow">MORE WORKS</span>
     <h2 class="more-ttl" id="moreTtl">그 밖의 작업</h2>
     <div class="more-strips">
-<article class="strip open" tabindex="0" aria-label="향수"><span class="s-num">04</span><b class="s-title">향수</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
-<article class="strip" tabindex="0" aria-label="영화"><span class="s-num">05</span><b class="s-title">영화</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
-<article class="strip" tabindex="0" aria-label="카페 브랜딩"><span class="s-num">06</span><b class="s-title">카페 브랜딩</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
-<article class="strip" tabindex="0" aria-label="뷰티 → 건축 리브랜딩"><span class="s-num">07</span><b class="s-title">뷰티 → 건축 리브랜딩</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
-<article class="strip" tabindex="0" aria-label="BIGBANG 20주년 굿즈"><span class="s-num">08</span><b class="s-title">BIGBANG 20주년 굿즈</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
+<article class="strip open" tabindex="0" aria-label="GYEOL"><span class="s-num">04 · 구상 중</span><b class="s-title">GYEOL</b><div class="s-body"><div class="s-type s-type-gyeol" aria-hidden="true"><span class="s-big">결</span><span class="s-name">GYEOL</span><span class="s-slogan">SPACE, IN YOUR TONE.</span></div><p class="s-desc">공간 컬러·마감재를 제안하는 스페이스 라이프스타일 브랜드 · 브랜딩과 서비스 기획 및 디자인 구상 중</p></div></article>
+<article class="strip" tabindex="0" aria-label="MO:A"><span class="s-num">05 · 구상 중</span><b class="s-title">MO:A</b><div class="s-body"><div class="s-type s-type-moa" aria-hidden="true"><span class="s-name">MO:A</span><ul class="s-lines"><li>LIGHT <b>23</b></li><li>OCEAN <b>12</b></li><li>FOG <b>06</b></li><li>WIND <b>04</b></li></ul></div><p class="s-desc">네 향 라인을 자연의 시간대 흐름으로 보여주는 니치 퍼퓸 광고 캠페인 · 구상 중</p></div></article>
     </div>
   </div>
 </section>
