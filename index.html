@@ -110,21 +110,25 @@ nav.menu a:hover,nav.menu a[aria-current="true"]{color:var(--acc)}
 .proj[data-n="3"]{--pc:var(--c3)}
 .proj-in{--gap:clamp(32px,5vw,64px);container-type:inline-size;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:var(--gap);align-items:center;padding-block:clamp(40px,6vw,72px)}
 .info{display:flex;flex-direction:column;gap:30px}
-.head{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
-.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;background:color-mix(in srgb,var(--pc) 18%,transparent);font:700 13px/1 var(--f-sans)}
-.chip i{width:10px;height:10px;border-radius:50%;background:var(--pc)}
+.head{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
 /* 제목은 한 줄로 칸 폭에 맞춰 줄어듦 (--w = 글자 폭 em, 기존 fitTitles와 같은 동작) */
 .ttl{--w:8;font:800 min(3.6rem,calc((100cqi - var(--gap)) * .4 / var(--w)))/1.05 var(--f-display);letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap}
-.line{font-size:17px;line-height:1.7;color:color-mix(in srgb,var(--fg) 80%,transparent);max-width:30em}
-.tags{display:flex;flex-wrap:wrap;gap:8px}
-.tags li{padding:6px 11px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--mut)}
+.line{font-size:16px;line-height:1.75;color:color-mix(in srgb,var(--fg) 80%,transparent)}
+/* 프로젝트 도형 그래픽 (기존 크기의 절반: 기존 약 660px → 330px) */
+.gfx{--g0:#FFD500;--g1:#1E90FF;--g2:#FF1493;--g3:#FFFFFF;--ink:#F4F4F6;position:relative;width:min(330px,100%);aspect-ratio:1;margin:2px 0}
+:root[data-theme="light"] .gfx{--ink:#111111}
+.gfx[data-g="2"]{--g0:#39DDF2;--g1:#FF72C6;--g2:#B8B8FF;--g3:#2EF8B6;--ink:#F8F4EC}
+:root[data-theme="light"] .gfx[data-g="2"]{--ink:#181820}
+.gfx[data-g="3"]{--g0:#50D9F5;--g1:#7952A8;--g2:#B36BC6;--g3:#E8E4F4;--ink:#E8E4F4}
+:root[data-theme="light"] .gfx[data-g="3"]{--g3:#17142F;--ink:#17142F}
+.gfx i{position:absolute;display:block;box-sizing:border-box;will-change:transform}
+@media(prefers-reduced-motion:no-preference){.gfx i{animation:bob 6s ease-in-out infinite alternate}.gfx i:nth-child(2n){animation-delay:-2s}.gfx i:nth-child(3n){animation-delay:-4s}}
+@keyframes bob{to{translate:0 -2.5%}}
 .acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .acts .btn{min-height:48px;padding:0 22px}
 .acts .btn.pri{background:var(--pc);border-color:var(--pc)}
 .acts .btn.pri:hover{color:var(--bg);box-shadow:0 8px 22px color-mix(in srgb,var(--pc) 40%,transparent)}
 .acts .btn.ghost:hover{border-color:var(--pc);color:var(--pc)}
-.state{display:inline-flex;gap:8px;align-items:center;margin-left:6px;font:600 12px/1 var(--f-mono);letter-spacing:.08em;color:var(--mut)}
-.state::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pc)}
 .shot{display:block;position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card);box-shadow:0 24px 60px rgb(0 0 0 / .28);transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .25s}
 .shot:hover{transform:translateY(-4px);border-color:var(--pc)}
 .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -299,15 +303,13 @@ footer{padding:36px 0 calc(36px + env(safe-area-inset-bottom));border-top:1px so
     <div class="wrap proj-in">
       <div class="info">
         <div class="head rv">
-          <span class="chip"><i></i>01 · 문화 IP 플랫폼</span>
           <h3 class="ttl" style="--w:6.6">UNI+ON</h3>
-          <p class="line">흩어진 게임·웹툰 굿즈를 탐색부터 장바구니까지 하나의 흐름으로 묶었습니다.</p>
-          <ul class="tags"><li>카테고리 탐색</li><li>커머스 동선</li><li>반응형</li></ul>
+          <div class="gfx" data-g="1" aria-hidden="true"></div>
+          <p class="line">흩어진 게임·웹툰 굿즈를<br>탐색부터 장바구니까지 한 흐름으로.</p>
         </div>
         <div class="acts rv">
-          <a class="btn pri" href="https://unionverse.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a>
-          <a class="btn ghost" href="case/uni-on.html" data-case="uni-on">케이스 스터디</a>
-          <span class="state">완료</span>
+          <a class="btn pri" href="https://unionverse.vercel.app" target="_blank" rel="noopener">사이트 가기 <span aria-hidden="true">↗</span></a>
+          <a class="btn ghost" href="case/uni-on.html" data-case="uni-on">작업 과정 보기</a>
         </div>
       </div>
       <a class="shot rv" href="https://unionverse.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="build/uni-on/uni-on_04_live.webp" width="1440" height="900" alt="" loading="lazy"></a>
@@ -318,15 +320,13 @@ footer{padding:36px 0 calc(36px + env(safe-area-inset-bottom));border-top:1px so
     <div class="wrap proj-in">
       <div class="info">
         <div class="head rv">
-          <span class="chip"><i></i>02 · 캐릭터 IP 브랜드</span>
           <h3 class="ttl" style="--w:7.9">PIXELINK</h3>
-          <p class="line">글 없이도 캐릭터의 성격이 전달되도록 인트로·커서·호버를 설계했습니다.</p>
-          <ul class="tags"><li>캐릭터 경험</li><li>브랜드 확장</li><li>인터랙션</li></ul>
+          <div class="gfx" data-g="2" aria-hidden="true"></div>
+          <p class="line">글 없이도 캐릭터의 성격이 전달되는<br>인트로·커서·호버를 설계했습니다.</p>
         </div>
         <div class="acts rv">
-          <a class="btn pri" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a>
-          <a class="btn ghost" href="case/pixelink.html" data-case="pixelink">케이스 스터디</a>
-          <span class="state">제작 중 · 재작업 예정</span>
+          <a class="btn pri" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener">사이트 가기 <span aria-hidden="true">↗</span></a>
+          <a class="btn ghost" href="case/pixelink.html" data-case="pixelink">작업 과정 보기</a>
         </div>
       </div>
       <a class="shot rv" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="build/pixelink/pixelink_04_live.webp" width="1440" height="900" alt="" loading="lazy"></a>
@@ -337,15 +337,13 @@ footer{padding:36px 0 calc(36px + env(safe-area-inset-bottom));border-top:1px so
     <div class="wrap proj-in">
       <div class="info">
         <div class="head rv">
-          <span class="chip"><i></i>03 · 게임 IP 런칭</span>
           <h3 class="ttl" style="--w:11.1">VORTEXFALL</h3>
-          <p class="line">낯선 세계관을 글 대신, 직접 비교하고 조작하며 이해하는 원페이지로 풀었습니다.</p>
-          <ul class="tags"><li>체험형 스토리텔링</li><li>원페이지 흐름</li><li>직접 조작 UI</li></ul>
+          <div class="gfx" data-g="3" aria-hidden="true"></div>
+          <p class="line">낯선 세계관을 직접 비교하고 조작하며<br>이해하는 원페이지로 풀었습니다.</p>
         </div>
         <div class="acts rv">
-          <a class="btn pri" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a>
-          <a class="btn ghost" href="case/vortexfall.html" data-case="vortexfall">케이스 스터디</a>
-          <span class="state">제작 중</span>
+          <a class="btn pri" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 가기 <span aria-hidden="true">↗</span></a>
+          <a class="btn ghost" href="case/vortexfall.html" data-case="vortexfall">작업 과정 보기</a>
         </div>
       </div>
       <a class="shot rv" href="https://vortexfall.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="build/vortexfall/vortexfall_04_live.webp" width="1440" height="900" alt="" loading="lazy"></a>
@@ -508,6 +506,34 @@ function navMark() {
   navLinks.forEach((a, k) => k === cur ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
 }
 paint(); navMark();
+
+
+/* ---------- 프로젝트 도형 그래픽 (기존 도형 정의를 그대로 옮김, box 좌표 -50~50) ---------- */
+(() => {
+  const p = (x, y, w, h, o = {}) => ({ x, y, w, h, r: o.r || 0, rad: o.rad || 0, f: o.f === undefined ? 'none' : o.f, sw: o.sw || 0, sc: o.sc || 'ink', sh: o.sh || 0 });
+  const pop = { sw: 3, sc: 'ink', sh: 5 };
+  const G = {
+    1: [p(-24,0,46,46,{rad:50,f:0,...pop}), p(24,0,46,46,{rad:50,f:1,...pop}), p(0,0,32,10,{rad:14,f:2,sw:3,sc:'ink',sh:4}), p(0,0,10,32,{rad:14,f:2,sw:3,sc:'ink',sh:4}),
+        p(-42,-38,10,10,{r:15,f:1,sw:3,sc:'ink',sh:3}), p(42,-38,9,9,{rad:50,f:2,sw:3,sc:'ink',sh:3}), p(-40,38,9,9,{rad:50,f:0,sw:3,sc:'ink',sh:3}), p(42,38,10,10,{r:-12,f:2,sw:3,sc:'ink',sh:3}),
+        p(0,-42,6,6,{rad:50,f:0,sw:2.5,sc:'ink',sh:3}), p(0,42,6,6,{r:45,f:1,sw:2.5,sc:'ink',sh:3})],
+    2: [p(-16.5,-27.5,22,11,{f:1}), p(16.5,-27.5,22,11,{f:1}), p(0,-11,77,22,{f:1}), p(0,5.5,55,11,{f:1}),
+        p(0,16.5,33,11,{f:1}), p(0,27.5,11,11,{f:1}), p(-22,-17,7,7,{f:'white'}), p(-42,-38,9,9,{f:0}),
+        p(42,-32,7,7,{f:2}), p(-44,24,6,6,{f:0}), p(42,36,8,8,{f:3}), p(8,-45,6,6,{f:2})],
+    3: [p(0,0,90,90,{rad:50,sw:1.2,sc:'acc'}), p(0,0,80,32,{rad:50,r:-28,sw:1.2,sc:'acc'}), p(0,0,80,32,{rad:50,r:32,sw:1.2,sc:'line'}), p(0,2,44,44,{r:45,f:1}),
+        p(0,2,28,28,{r:45,f:0}), p(0,2,12,12,{r:45,f:3}), p(-32,38,6,11,{r:25,f:2}), p(34,32,5,9,{r:-30,f:1}), p(-8,46,4,7,{r:12,f:0})]
+  };
+  const col = t => typeof t === 'number' ? `var(--g${t})` : t === 'white' ? '#fff' : t === 'ink' ? 'var(--ink)' : t === 'acc' ? 'var(--pc)' : t === 'line' ? 'color-mix(in srgb,var(--fg) 30%,transparent)' : 'none';
+  const S = 330;   /* 기존 box 크기(약 660px)의 절반 */
+  document.querySelectorAll('.gfx').forEach(el => {
+    G[el.dataset.g].forEach(s => {
+      const d = document.createElement('i'), u = v => (v / 100 * 100) + '%';
+      d.style.cssText = `left:${50 + s.x - s.w / 2}%;top:${50 + s.y - s.h / 2}%;width:${s.w}%;height:${s.h}%;` +
+        `border-radius:${s.rad}%;transform:rotate(${s.r}deg);background:${col(s.f)};` +
+        (s.sw ? `border:${s.sw / 2}px solid ${col(s.sc)};` : '') + (s.sh ? `box-shadow:${s.sh / 2}px ${s.sh / 2}px 0 ${col(s.sc)};` : '');
+      el.appendChild(d);
+    });
+  });
+})();
 
 /* ---------- 등장 효과 (짧게 한 번) ---------- */
 (() => {
