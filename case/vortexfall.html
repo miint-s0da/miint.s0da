@@ -8,212 +8,125 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0E1030;--bg2:#14163A;--card:#1F2252;--fg:#F4F4F8;--sub:#B8B8FF;--mut:rgba(244,244,248,.66);--cy:#4CC9F0;--vi:#7C4DFF;--pk:#FF2DAA;--line:rgba(184,184,255,.18);
+:root{--bg:#0E1030;--bg2:#17142F;--panel:rgba(23,20,47,.92);--fg:#F4F2FA;--sub:#C9C2EA;--mut:rgba(232,228,244,.72);--cy:#50D9F5;--vi:#7952A8;--dv:#49316F;--pk:#FF2DAA;--line:rgba(184,184,255,.2);
   --mono:'JetBrains Mono','Noto Sans KR',monospace;--disp:'Rajdhani','Noto Sans KR',sans-serif;--body:'Noto Sans KR',system-ui,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.75 var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased;
+body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.7 var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased;
   background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;background-attachment:fixed}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(1200px 600px at 80% -10%,rgba(124,77,255,.28),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(76,201,240,.16),transparent 60%);z-index:0}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(1100px 600px at 85% -10%,rgba(121,82,168,.35),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(80,217,245,.14),transparent 60%);z-index:0}
 img{display:block;max-width:100%}
 a{color:inherit}
-.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+
 /* top bar */
-.bar{position:sticky;top:0;z-index:10;background:rgba(14,16,48,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.bar{position:sticky;top:0;z-index:10;background:rgba(14,16,48,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:16px}
 .bar b{font:700 12px/1 var(--mono);letter-spacing:.2em;color:var(--cy)}
-.bar nav{display:flex;gap:18px;font:600 11px/1 var(--mono);letter-spacing:.14em;color:var(--mut)}
+.bar nav{display:flex;gap:20px;font:600 11px/1 var(--mono);letter-spacing:.14em;color:var(--mut)}
 .bar nav a{text-decoration:none}.bar nav a:hover{color:var(--fg)}
-.x{width:40px;height:40px;border:1px solid var(--line);background:var(--bg2);color:var(--fg);font-size:18px;cursor:pointer;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.x{width:44px;height:44px;border:1px solid var(--line);background:var(--bg2);color:var(--fg);font-size:18px;cursor:pointer;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
 .x:hover{background:var(--cy);color:var(--bg)}
-@media(max-width:860px){.bar nav{display:none}}
-/* HUD frame */
-.hud{position:relative;background:linear-gradient(180deg,rgba(76,201,240,.06),transparent 50%),rgba(20,22,58,.82);border:1px solid rgba(76,201,240,.32);padding:clamp(20px,3vw,32px)}
-.hud::before,.hud::after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--cy)}
-.hud::before{left:-1px;top:-1px;border-right:0;border-bottom:0}.hud::after{right:-1px;bottom:-1px;border-left:0;border-top:0}
-/* section */
-section{position:relative;z-index:1;padding:clamp(64px,9vw,120px) 0 0}
-.lbl{display:flex;align-items:center;gap:12px;font:700 11px/1 var(--mono);letter-spacing:.22em;color:var(--cy);margin-bottom:18px}
-.lbl i{font-style:normal;color:var(--mut)}
-.lbl::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
-h2{margin:0 0 14px;font:700 clamp(30px,4.6vw,52px)/1.05 var(--disp);letter-spacing:.01em;text-transform:uppercase}
-h2 em{font-style:normal;color:var(--cy)}
-.lead{max-width:760px;color:var(--mut);font-size:16px;margin:0 0 34px}
-h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
-/* reveal: scanline sweep */
-.rv{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}
+@media(max-width:760px){.bar nav{display:none}}
+
+/* panel: every text block lives in one */
+.pn{position:relative;background:var(--panel);border:1px solid rgba(80,217,245,.28);padding:clamp(18px,2.6vw,28px)}
+.pn::before,.pn::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--cy)}
+.pn::before{left:-1px;top:-1px;border-right:0;border-bottom:0}.pn::after{right:-1px;bottom:-1px;border-left:0;border-top:0}
+.tag{display:inline-block;font:700 10.5px/1 var(--mono);letter-spacing:.18em;color:var(--cy)}
+.tag.pk{color:var(--pk)}
+
+/* section header bar */
+section{position:relative;z-index:1;padding:clamp(56px,8vw,104px) 0 0}
+.sh{display:grid;grid-template-columns:auto 1fr;align-items:stretch;margin-bottom:18px;border:1px solid var(--line);background:var(--panel)}
+.sh .no{display:flex;align-items:center;padding:0 clamp(14px,2vw,22px);background:var(--cy);color:var(--bg);font:700 clamp(22px,3vw,30px)/1 var(--disp)}
+.sh .tt{padding:14px clamp(14px,2vw,22px)}
+.sh .tt small{display:block;font:700 10.5px/1 var(--mono);letter-spacing:.2em;color:var(--sub);margin-bottom:8px}
+.sh h2{margin:0;font:700 clamp(22px,3.2vw,34px)/1.2 var(--body);letter-spacing:-.01em}
+.sh h2 em{font-style:normal;color:var(--cy)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
-.sweep{position:relative;overflow:hidden}
-.sweep::after{content:"";position:absolute;left:0;right:0;top:-40%;height:40%;background:linear-gradient(180deg,transparent,rgba(76,201,240,.22),transparent);pointer-events:none;opacity:0}
-.sweep.in::after{animation:sw 1.3s ease-out}
-@keyframes sw{0%{top:-40%;opacity:1}100%{top:110%;opacity:0}}
-/* cover */
-.cover{padding-top:clamp(28px,4vw,48px)}
-.cover-img{position:relative;aspect-ratio:16/8;overflow:hidden;border:1px solid rgba(76,201,240,.32)}
-.cover-img img{width:100%;height:100%;object-fit:cover}
-.cover-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(14,16,48,.94)),linear-gradient(90deg,rgba(14,16,48,.55),transparent 55%)}
-.cover-t{position:absolute;left:clamp(20px,4vw,48px);right:clamp(20px,4vw,48px);bottom:clamp(20px,3.5vw,40px);z-index:2}
-.cover-t .logo{width:min(520px,70%);filter:drop-shadow(0 8px 30px rgba(124,77,255,.5))}
-.cover-t p{margin:10px 0 0;font:600 12px/1.6 var(--mono);letter-spacing:.32em;color:var(--sub)}
-.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:18px}
-.meta div{background:var(--bg2);padding:16px 18px}
-.meta dt{font:700 10px/1 var(--mono);letter-spacing:.2em;color:var(--cy);margin-bottom:8px}
-.meta dd{margin:0;font-size:13.5px;line-height:1.6}
-@media(max-width:860px){.meta{grid-template-columns:repeat(2,1fr)}}
-/* concept */
-.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,3vw,36px);align-items:stretch}
-@media(max-width:900px){.split{grid-template-columns:1fr}}
-.quote{font:700 clamp(26px,3.4vw,40px)/1.2 var(--disp);color:var(--fg);margin:0 0 16px}
-.quote span{color:var(--pk)}
-.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
-.cmp figure{margin:0;position:relative}
-.cmp img{aspect-ratio:4/3;object-fit:cover;width:100%;border:1px solid var(--line)}
-.cmp figcaption{position:absolute;left:10px;top:10px;font:700 10px/1 var(--mono);letter-spacing:.16em;padding:6px 8px;background:rgba(14,16,48,.85);border:1px solid var(--line)}
-.kael{position:relative;overflow:hidden;min-height:420px}
-.kael img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:78% 30%}
-.kael::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(14,16,48,.95))}
-.kael .tx{position:absolute;left:24px;right:24px;bottom:22px;z-index:2}
-.kael .tx b{display:block;font:700 34px/1 var(--disp);letter-spacing:.06em}
-.kael .tx small{display:block;margin:6px 0 10px;font:600 11px/1.5 var(--mono);letter-spacing:.14em;color:var(--cy)}
-.kael .tx p{margin:0;font-size:13.5px;color:var(--mut)}
-/* intent */
-.why{font-size:17px;line-height:1.85;margin:0 0 28px;max-width:880px}
-.why b{color:var(--cy);font-weight:700}
-.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:860px){.cards3{grid-template-columns:1fr}}
-.k{position:relative;padding:24px 22px 22px;background:var(--bg2);border:1px solid var(--line);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%)}
-.k .n{font:700 44px/1 var(--disp);color:transparent;-webkit-text-stroke:1px var(--cy);margin-bottom:12px}
-.k p{margin:0;color:var(--mut);font-size:14px}
-.goal{margin-top:16px;display:flex;gap:16px;align-items:center;padding:18px 22px;border-left:3px solid var(--pk);background:rgba(255,45,170,.07)}
-.goal b{font:700 11px/1 var(--mono);letter-spacing:.2em;color:var(--pk);white-space:nowrap}
-/* design */
-.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media(max-width:900px){.dgrid{grid-template-columns:1fr}}
-.dg h3{display:flex;gap:10px;align-items:baseline}.dg h3 small{font:700 10px/1 var(--mono);letter-spacing:.18em;color:var(--cy)}
-.dg p{margin:0 0 14px;color:var(--mut);font-size:14px}
-.ident{display:flex;align-items:center;gap:22px;padding:18px;background:rgba(14,16,48,.6);border:1px solid var(--line)}
-.ident .em{width:92px;flex:none}.ident .lg{flex:1;min-width:0}
-.pal{display:grid;gap:10px}
-.pal .row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center}
-.pal .row span{font:700 10px/1.3 var(--mono);letter-spacing:.12em;color:var(--sub)}
-.chips{display:flex;height:34px;border:1px solid var(--line)}
-.chips i{flex:1;position:relative}
-.chips i:hover::after{content:attr(data-c);position:absolute;left:4px;bottom:-18px;font:600 9px/1 var(--mono);color:var(--mut);white-space:nowrap}
-.rift{height:34px;background:linear-gradient(90deg,#6A00FF,#B5179E,#FF2DAA,#F7C59F);border:1px solid var(--line)}
-.rules{display:grid;gap:8px;margin:0;padding:0;list-style:none}
-.rules li{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:14px;color:var(--mut)}
-.rules li::before{content:"▸";color:var(--cy)}
-.rules b{color:var(--fg);font-weight:600}
-.sk{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.sk span{font:700 11px/1 var(--mono);letter-spacing:.1em;padding:9px 12px;border:1px solid}
-.sk .c{color:var(--cy);border-color:rgba(76,201,240,.5)}.sk .v{color:#B79BFF;border-color:rgba(124,77,255,.6)}.sk .b{color:var(--fg);border-color:transparent;background:linear-gradient(90deg,rgba(76,201,240,.35),rgba(124,77,255,.45))}
-/* output */
-.flow{display:grid;grid-template-columns:repeat(9,1fr);gap:6px;margin-bottom:22px}
-@media(max-width:900px){.flow{grid-template-columns:repeat(3,1fr)}}
-.flow div{padding:12px 10px;background:var(--bg2);border:1px solid var(--line);font:700 10.5px/1.4 var(--mono);letter-spacing:.06em;text-align:center}
-.flow div small{display:block;margin-top:4px;font:400 11px/1.4 var(--body);letter-spacing:0;color:var(--mut)}
-.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media(max-width:760px){.gal{grid-template-columns:1fr}}
-.gal figure{margin:0;background:var(--bg2);border:1px solid var(--line)}
-.gal img{aspect-ratio:1440/860;object-fit:cover;width:100%}
-.gal figcaption{padding:12px 16px 14px;font-size:13px;color:var(--mut)}
-.gal figcaption b{display:block;font:700 11px/1.4 var(--mono);letter-spacing:.14em;color:var(--cy);margin-bottom:2px}
-.gal .wide{grid-column:1/-1}
-.devices{display:flex;gap:24px;align-items:flex-end;justify-content:center;flex-wrap:wrap;margin-top:22px;padding:30px 20px;background:rgba(14,16,48,.55);border:1px solid var(--line)}
-.ph{width:210px;padding:34px 10px 12px;background:#0a0b1c;border-radius:36px;position:relative;box-shadow:0 20px 40px rgba(0,0,0,.4),0 0 0 1px rgba(184,184,255,.25)}
-.ph::before{content:"";position:absolute;left:50%;top:11px;width:30%;height:14px;margin-left:-15%;background:#000;border-radius:10px}
-.ph img{border-radius:26px}
-.devices p{flex-basis:100%;text-align:center;margin:6px 0 0;color:var(--mut);font-size:13.5px}
-/* tools */
-.tools{width:100%;border-collapse:collapse;font-size:14px}
-.tools th,.tools td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-.tools th{font:700 10px/1 var(--mono);letter-spacing:.2em;color:var(--cy)}
-.tools td:first-child{font:700 11px/1.5 var(--mono);letter-spacing:.08em;color:var(--sub);white-space:nowrap}
-.tools td:nth-child(2){font-weight:700;white-space:nowrap}
-.tools td:last-child{color:var(--mut)}
-@media(max-width:700px){.tools thead{display:none}.tools tr{display:grid;grid-template-columns:1fr;padding:12px 0;border-bottom:1px solid var(--line)}.tools td{border:0;padding:2px 0}}
-.proc{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;align-items:center}
-.proc span{padding:10px 14px;background:var(--card);border:1px solid var(--line);font-size:13px}
-.proc i{font-style:normal;color:var(--cy)}
-/* problems */
-.pb{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media(max-width:860px){.pb{grid-template-columns:1fr}}
-.pb .hud h3 small{display:block;font:700 10px/1 var(--mono);letter-spacing:.2em;color:var(--pk);margin-bottom:10px}
-.pb dl{margin:0;display:grid;gap:6px;font-size:14px}
-.pb dt{font:700 10px/1.6 var(--mono);letter-spacing:.16em;color:var(--sub)}
-.pb dd{margin:0 0 6px;color:var(--mut)}
-/* end */
-.end{padding-bottom:clamp(64px,9vw,110px)}
-.next{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
-@media(max-width:760px){.next{grid-template-columns:1fr}}
-.next ul{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:6px;color:var(--mut);font-size:14px}
-.next li::before{content:"□ ";color:var(--cy)}
-.go{display:inline-flex;align-items:center;gap:12px;padding:18px 28px;background:var(--cy);color:var(--bg);font:700 13px/1 var(--mono);letter-spacing:.14em;text-decoration:none;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);transition:background .2s}
-.go:hover{background:var(--fg)}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.sweep.in::after{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
-/* ---- PROCESS ---- */
-.step3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
-@media(max-width:860px){.step3{grid-template-columns:1fr}}
-.st{position:relative;margin:0;background:var(--bg2);border:1px solid var(--line)}
-.st img{width:100%;aspect-ratio:16/10;object-fit:cover}
-.st.tall img{aspect-ratio:3/4;object-position:top}
-.st figcaption{padding:12px 14px 14px;font-size:13px;color:var(--mut)}
-.st figcaption b{display:block;font:700 10.5px/1.5 var(--mono);letter-spacing:.14em;color:var(--cy);margin-bottom:3px}
-.st .no{position:absolute;left:10px;top:10px;font:700 10px/1 var(--mono);letter-spacing:.14em;padding:6px 8px;background:rgba(14,16,48,.9);border:1px solid var(--line)}
-.st.now{border-color:var(--cy);box-shadow:0 0 0 1px var(--cy),0 10px 40px rgba(76,201,240,.18)}
-.st.now .no{background:var(--cy);color:var(--bg);border-color:var(--cy)}
-.arrowrow{display:none}
-.pstep{margin-top:clamp(36px,5vw,56px)}
-.pstep>h3{display:flex;align-items:baseline;gap:12px;font-size:20px;margin-bottom:6px}
-.pstep>h3 small{font:700 11px/1 var(--mono);letter-spacing:.2em;color:var(--pk)}
-.pstep>p{margin:0 0 18px;color:var(--mut);max-width:820px}
-.idgrid{display:grid;grid-template-columns:.8fr 1.2fr 1fr;gap:14px;align-items:stretch}
-@media(max-width:900px){.idgrid{grid-template-columns:1fr}}
-.idgrid .st img{aspect-ratio:auto;height:100%;max-height:340px;object-fit:contain;background:#0a0b1c}
-.pipe{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center}
-.pipe .ar{font:700 22px/1 var(--mono);color:var(--cy)}
-@media(max-width:760px){.pipe{grid-template-columns:1fr}.pipe .ar{transform:rotate(90deg);justify-self:center}}
-.pipe .st img{aspect-ratio:3/4;object-fit:cover;object-position:top}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
-.pair .st img{aspect-ratio:3/4;object-fit:cover;object-position:top}
-/* ---- DECISIONS ---- */
-.dec{display:grid;gap:16px}
-.dc{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(16px,2.6vw,28px);align-items:center}
-@media(max-width:900px){.dc{grid-template-columns:1fr}}
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.vs figure{margin:0;position:relative;border:1px solid var(--line)}
-.vs img{width:100%;aspect-ratio:16/10;object-fit:cover}
-.vs figcaption{position:absolute;left:8px;top:8px;font:700 10px/1 var(--mono);letter-spacing:.12em;padding:6px 8px;background:rgba(14,16,48,.9)}
-.vs .x2{opacity:.55;filter:grayscale(.5)}
-.vs .x2 figcaption{color:var(--mut);text-decoration:line-through}
-.vs .ok figcaption{background:var(--cy);color:var(--bg)}
-.chose{display:grid;gap:8px;font-size:14px}
-.chose .q{font:700 10.5px/1 var(--mono);letter-spacing:.18em;color:var(--pk)}
-.chose h3{font-size:19px;margin:2px 0 4px}
-.chose p{margin:0;color:var(--mut)}
-.chose .a{padding:12px 14px;border-left:3px solid var(--cy);background:rgba(76,201,240,.07);color:var(--fg)}
-.txtdec{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:900px){.txtdec{grid-template-columns:1fr}}
-.next ul.big{grid-template-columns:1fr 1fr;column-gap:28px}
-@media(max-width:760px){.next ul.big{grid-template-columns:1fr}}
+/* 01 cover */
+.cover{padding-top:clamp(20px,3vw,36px)}
+.hero{position:relative;aspect-ratio:16/7.2;overflow:hidden;border:1px solid rgba(80,217,245,.3)}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero .logo{position:absolute;left:clamp(16px,3vw,32px);bottom:clamp(14px,2.6vw,28px);width:min(440px,62%);height:auto;filter:drop-shadow(0 8px 30px rgba(0,0,0,.6))}
+.brief{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:860px){.brief{grid-template-columns:1fr}.hero{aspect-ratio:16/10}}
+.brief h1{margin:10px 0 12px;font:700 clamp(22px,2.8vw,30px)/1.35 var(--body)}
+.brief h1 em{font-style:normal;color:var(--cy)}
+.brief p{margin:0 0 14px;color:var(--mut)}
+.goal{display:flex;gap:14px;align-items:baseline;padding:12px 14px;border-left:3px solid var(--pk);background:rgba(255,45,170,.08)}
+.goal b{font:700 10.5px/1 var(--mono);letter-spacing:.2em;color:var(--pk);white-space:nowrap}
+.meta{margin:0;display:grid;gap:0}
+.meta div{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.meta div:last-child{border-bottom:0}
+.meta dt{font:700 10.5px/1.7 var(--mono);letter-spacing:.16em;color:var(--cy)}
+.meta dd{margin:0;font-size:14px}
 
-/* ---- UX RATIONALE ---- */
-.ux{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media(max-width:860px){.ux{grid-template-columns:1fr}}
-.ux .hud{display:grid;gap:10px}
-.ux .t{display:flex;gap:12px;align-items:baseline}
-.ux .t b{font:700 11px/1 var(--mono);letter-spacing:.16em;color:var(--cy);white-space:nowrap}
-.ux .t h3{margin:0;font-size:17px}
-.ux .row{display:grid;grid-template-columns:62px 1fr;gap:10px;font-size:14px}
-.ux .row span{font:700 10px/1.9 var(--mono);letter-spacing:.14em;color:var(--sub)}
-.ux .row p{margin:0;color:var(--mut)}
-.ux .row.r p{color:var(--fg)}
-.funnel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 22px}
-.funnel span{padding:10px 14px;border:1px solid var(--line);background:var(--bg2);font-size:13px}
+/* 02 ux */
+.funnel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px}
+.funnel span{padding:9px 12px;border:1px solid var(--line);background:rgba(14,16,48,.7);font-size:13px}
 .funnel span b{display:block;font:700 10px/1.4 var(--mono);letter-spacing:.14em;color:var(--cy)}
 .funnel i{font-style:normal;color:var(--cy)}
-.funnel span.cta{border-color:var(--pk);background:rgba(255,45,170,.1)}.funnel span.cta b{color:var(--pk)}
+.funnel span.cta{border-color:var(--pk);background:rgba(255,45,170,.12)}.funnel span.cta b{color:var(--pk)}
+.ux{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.ux{grid-template-columns:1fr}}
+.uc{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.uc img{width:100%;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--line)}
+.uc .in{padding:16px 18px 18px;display:grid;gap:8px}
+.uc h3{margin:0;font:700 17px/1.4 var(--body)}
+.uc .p{margin:0;font-size:14px;color:var(--mut)}
+.uc .s{margin:0;font-size:14px;padding-left:12px;border-left:2px solid var(--cy)}
+
+/* 03 process */
+.blk+.blk{margin-top:14px}
+.blk .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:14px}
+.blk h3{margin:0;font:700 19px/1.4 var(--body)}
+.blk .hd p{flex-basis:100%;margin:0;color:var(--mut);font-size:14px}
+.steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center}
+.steps .ar{font:700 20px/1 var(--mono);color:var(--cy)}
+@media(max-width:760px){.steps{grid-template-columns:1fr}.steps .ar{transform:rotate(90deg);justify-self:center}
+  .steps.t3{grid-template-columns:repeat(3,1fr);gap:6px}.steps.t3 .ar{display:none}.steps.t3 figcaption{font-size:11.5px;padding:8px}}
+.fr{margin:0;background:#0b0c22;border:1px solid var(--line)}
+.fr img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.fr.tall img{aspect-ratio:4/5;object-position:top}
+.fr figcaption{padding:10px 12px 12px;font-size:13px;color:var(--mut)}
+.fr figcaption b{display:block;font:700 10.5px/1.5 var(--mono);letter-spacing:.12em;color:var(--cy)}
+.fr.now{border-color:var(--cy);box-shadow:0 0 0 1px var(--cy)}
+.dec{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4vw,24px);align-items:center}
+@media(max-width:860px){.dec{grid-template-columns:1fr}}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vs .x2{opacity:.55;filter:grayscale(.5)}
+.vs .x2 figcaption b{color:var(--mut);text-decoration:line-through}
+.dec .why{display:grid;gap:10px;font-size:14px}
+.dec .why p{margin:0;color:var(--mut)}
+.dec .why .a{color:var(--fg);padding:12px 14px;border-left:3px solid var(--cy);background:rgba(80,217,245,.08)}
+
+/* 04 result */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gal .big{grid-column:1/-1}
+.gal .fr img{aspect-ratio:1440/860}
+@media(max-width:760px){.gal{grid-template-columns:1fr}}
+.mob{display:grid;grid-template-columns:auto auto 1fr;gap:clamp(14px,2.4vw,28px);align-items:center;margin-top:14px}
+@media(max-width:700px){.mob{grid-template-columns:1fr 1fr}.mob .ph{width:100%}.mob .tx{grid-column:1/-1}}
+.ph{width:190px;padding:30px 9px 10px;background:#08091a;border-radius:32px;position:relative;box-shadow:0 0 0 1px rgba(184,184,255,.25)}
+.ph::before{content:"";position:absolute;left:50%;top:10px;width:30%;height:12px;margin-left:-15%;background:#000;border-radius:8px}
+.ph img{border-radius:24px}
+.mob .tx{display:grid;gap:12px;font-size:14px}
+.mob .tx p{margin:0;color:var(--mut)}
+.end{padding-bottom:clamp(56px,8vw,100px)}
+.wrapup{display:grid;grid-template-columns:1fr 1fr auto;gap:clamp(14px,2.4vw,28px);align-items:start}
+@media(max-width:900px){.wrapup{grid-template-columns:1fr}}
+.wrapup p{margin:8px 0 0;font-size:14px;color:var(--mut)}
+.btns{display:grid;gap:10px;min-width:220px}
+.go{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:0 20px;font:700 12.5px/1 var(--mono);letter-spacing:.12em;text-decoration:none;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);transition:background .2s,color .2s}
+.go.pri{background:var(--cy);color:var(--bg)}.go.pri:hover{background:var(--fg)}
+.go.sec{background:var(--dv);color:var(--fg)}.go.sec:hover{background:var(--vi)}
 </style>
 </head>
 <body>
@@ -221,215 +134,119 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 <header class="bar">
   <div class="wrap">
     <b>CASE STUDY // 03</b>
-    <nav aria-label="케이스 스터디 목차"><a href="#challenge">CHALLENGE</a><a href="#ux">UX</a><a href="#process">PROCESS</a><a href="#decisions">DECISIONS</a><a href="#result">RESULT</a><a href="#tools">TOOLS</a><a href="#next">NEXT</a></nav>
+    <nav aria-label="케이스 스터디 목차"><a href="#challenge">CHALLENGE</a><a href="#ux">UX</a><a href="#process">PROCESS</a><a href="#result">RESULT</a></nav>
     <button class="x" id="close" type="button" aria-label="닫기">✕</button>
   </div>
 </header>
 
 <main>
-<!-- 0. COVER -->
-<section class="cover">
+<!-- 01 CHALLENGE -->
+<section class="cover" id="challenge">
   <div class="wrap">
-    <div class="cover-img rv sweep">
+    <div class="hero rv">
       <img src="vortexfall/cover.webp" alt="도시 하늘에 열린 소용돌이 균열">
-      <div class="cover-t"><img class="logo" src="vortexfall/logo.webp" alt="VORTEXFALL"><p>ORIGINAL GAME IP · LAUNCH SHOWCASE · 2026</p></div>
+      <img class="logo" src="vortexfall/logo.webp" alt="VORTEXFALL">
     </div>
-    <dl class="meta rv">
-      <div><dt>TYPE</dt><dd>오리지널 게임 IP<br>런칭 쇼케이스 사이트</dd></div>
-      <div><dt>ROLE</dt><dd>기획 · 세계관 · 디자인<br>영상 · 사운드 · 개발 (1인)</dd></div>
-      <div><dt>STACK</dt><dd>HTML · CSS · JS<br>three.js · GSAP · WebGL</dd></div>
-      <div><dt>YEAR / STATUS</dt><dd>2026<br>메인 완성 · 확장 제작 중</dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- 1. CHALLENGE -->
-<section id="challenge">
-  <div class="wrap">
-    <div class="lbl rv">01 <i>//</i> CHALLENGE</div>
-    <h2 class="rv">AI로 만든 조각들을 <em>하나의 세계</em>로</h2>
-    <div class="split">
-      <div class="rv">
-        <p class="why" style="margin-bottom:18px">게임 팬은 출시 전 <b>세계관과 캐릭터</b>에서 먼저 생긴다. 그래서 정보를 나열하는 홍보 페이지가 아니라, 스크롤하는 동안 <b>그 세계 안에 들어가 있는 런칭 사이트</b>를 목표로 했다.</p>
-        <p class="lead" style="margin:0 0 14px">가장 큰 과제는 AI였다. 이미지와 영상을 생성할 때마다 캐릭터의 얼굴, 색, 분위기가 조금씩 달라졌다. 이 조각들을 <b>"같은 좌표, 다른 법칙"</b>을 가진 하나의 세계로 보이게 만드는 것, 그리고 기획부터 배포까지 혼자 끝까지 연결하는 것이 이 프로젝트의 핵심이었다.</p>
+    <div class="brief">
+      <div class="pn rv">
+        <span class="tag">01 // CHALLENGE</span>
+        <h1>AI로 만든 조각들을 <em>하나의 세계</em>로</h1>
+        <p>게임 팬은 출시 전 세계관과 캐릭터에서 먼저 생긴다. 그래서 정보를 나열하는 홍보 페이지가 아니라, 스크롤하는 동안 그 세계 안에 들어가 있는 런칭 사이트를 목표로 했다. 가장 큰 과제는 생성할 때마다 얼굴·색·분위기가 달라지는 AI 결과물을 하나의 세계로 묶는 것이었다.</p>
         <div class="goal"><b>GOAL</b><span>스크롤하는 동안 두 세계 안에 들어가 있는 느낌을 주는 게임 IP 런칭 쇼케이스</span></div>
       </div>
-      <div class="cmp rv" style="margin-top:0">
-        <figure><img src="vortexfall/world_real.webp" alt="현실 세계: 하이테크 유리 도시" loading="lazy"><figcaption>REALITY · GLASS CITY</figcaption></figure>
-        <figure><img src="vortexfall/world_other.webp" alt="이면 세계: 눈과 결정의 도시" loading="lazy"><figcaption>OTHERWORLD · CRYSTAL WINTER</figcaption></figure>
-      </div>
+      <dl class="pn meta rv">
+        <div><dt>TYPE</dt><dd>오리지널 게임 IP 런칭 쇼케이스</dd></div>
+        <div><dt>ROLE</dt><dd>기획 · 세계관 · 디자인 · 영상 · 사운드 · 개발 (1인)</dd></div>
+        <div><dt>STACK</dt><dd>HTML · CSS · JS · three.js · GSAP · WebGL</dd></div>
+        <div><dt>STATUS</dt><dd>2026 · 메인 완성, 확장 제작 중</dd></div>
+      </dl>
     </div>
   </div>
 </section>
 
-<!-- UX RATIONALE -->
+<!-- 02 UX -->
 <section id="ux">
   <div class="wrap">
-    <div class="lbl rv">02 <i>//</i> UX RATIONALE</div>
-    <h2 class="rv">WHY THIS <em>LAYOUT</em></h2>
-    <p class="lead rv">원페이지 스크롤을 고른 이유는 런칭 사이트의 목적이 "세계관을 이해시키고 → 사전예약으로 이어지게" 하는 하나의 흐름이기 때문이다. 섹션 순서를 이 흐름에 맞춰 배치하고, 긴 페이지에서도 길을 잃지 않도록 탐색 장치를 더했다.</p>
-    <div class="funnel rv">
-      <span><b>HOOK</b>인트로 · 히어로</span><i>→</i><span><b>UNDERSTAND</b>01 세계 · 02 에너지</span><i>→</i><span><b>ATTACH</b>03 캐릭터</span><i>→</i><span><b>IMAGINE</b>04 플레이 · 05 시스템</span><i>→</i><span><b>FEEL</b>미디어</span><i>→</i><span class="cta"><b>ACTION</b>사전예약</span>
+    <div class="sh rv"><span class="no">02</span><div class="tt"><small>UX RATIONALE</small><h2>왜 <em>원페이지 스크롤</em>인가</h2></div></div>
+    <div class="pn rv" style="margin-bottom:14px">
+      <div class="funnel">
+        <span><b>HOOK</b>인트로 · 히어로</span><i>→</i><span><b>UNDERSTAND</b>세계 · 에너지</span><i>→</i><span><b>ATTACH</b>캐릭터</span><i>→</i><span><b>IMAGINE</b>플레이 · 시스템</span><i>→</i><span><b>FEEL</b>미디어</span><i>→</i><span class="cta"><b>ACTION</b>사전예약</span>
+      </div>
+      <p style="margin:0;color:var(--mut);font-size:14px">런칭 사이트의 목적은 "세계관을 이해시키고 → 사전예약으로 이어지게" 하는 하나의 흐름이라, 섹션 순서를 이 흐름에 맞췄다.</p>
     </div>
     <div class="ux">
-      <div class="hud rv"><div class="t"><b>UX 01</b><h3>긴 페이지에서 현재 위치 알기</h3></div>
-        <div class="row"><span>ISSUE</span><p>섹션이 9개인 원페이지라, 스크롤하다 보면 지금 어디쯤인지, 무엇이 남았는지 알기 어렵다.</p></div>
-        <div class="row r"><span>DESIGN</span><p>상단 메뉴에 섹션 번호(01~06)를 붙이고, 오른쪽에 현재 섹션 표시 점을 고정했다. 배경 하늘의 시각(04:12 → 06:40)도 진행률 역할을 한다.</p></div>
-        <div class="row"><span>EFFECT</span><p>원하는 섹션으로 바로 이동할 수 있고, 남은 분량을 감각적으로 알 수 있다.</p></div></div>
-      <div class="hud rv"><div class="t"><b>UX 02</b><h3>설명 대신 직접 조작</h3></div>
-        <div class="row"><span>ISSUE</span><p>"같은 좌표, 다른 법칙"이라는 세계관은 글로 읽으면 추상적이다.</p></div>
-        <div class="row r"><span>DESIGN</span><p>두 세계 비교는 드래그 슬라이더, 에너지 상태는 STABLE / UNSTABLE 토글, 스킬은 카드 선택으로 바꿨다.</p></div>
-        <div class="row"><span>EFFECT</span><p>읽지 않고 손으로 비교하며 이해한다. 세계관의 핵심 설정을 한 번의 동작으로 전달한다.</p></div></div>
-      <div class="hud rv"><div class="t"><b>UX 03</b><h3>진입 장벽 줄이기</h3></div>
-        <div class="row"><span>ISSUE</span><p>인트로 연출과 사운드는 몰입을 주지만, 다시 방문한 사람에게는 기다림과 소음이 된다.</p></div>
-        <div class="row r"><span>DESIGN</span><p>인트로는 언제든 SKIP, 재방문 시 30일간 자동 생략. 사운드는 입장 후에만 재생하고 배경음악과 효과음을 따로 끌 수 있게 했다. 히어로에서는 H(HUD 숨김) · T(트레일러) · Enter(사전예약) 단축키를 지원한다.</p></div>
-        <div class="row"><span>EFFECT</span><p>처음 온 사람은 연출을 경험하고, 다시 온 사람은 바로 원하는 내용으로 간다.</p></div></div>
-      <div class="hud rv"><div class="t"><b>UX 04</b><h3>목표 행동을 항상 가까이</h3></div>
-        <div class="row"><span>ISSUE</span><p>쇼케이스의 최종 목표는 사전예약인데, 페이지 맨 끝에만 두면 도중에 이탈한다.</p></div>
-        <div class="row r"><span>DESIGN</span><p>상단 고정 메뉴에 PRE-REGISTER 버튼을 항상 노출하고, 히어로에도 사전예약·트레일러 버튼을 바로 배치했다.</p></div>
-        <div class="row"><span>EFFECT</span><p>어느 위치에서든 한 번의 클릭으로 사전예약에 도달한다.</p></div></div>
-      <div class="hud rv"><div class="t"><b>UX 05</b><h3>정보 위계 정리</h3></div>
-        <div class="row"><span>ISSUE</span><p>게임 정보가 많아 섹션마다 텍스트 양이 쉽게 늘어난다.</p></div>
-        <div class="row r"><span>DESIGN</span><p>섹션마다 [영문 라벨 → 큰 제목 → 한 줄 요약 → 상세 패널] 순서로 통일했다.</p></div>
-        <div class="row"><span>EFFECT</span><p>훑어보는 사람은 제목과 요약만, 관심 있는 사람은 패널까지 보는 2단계 탐색이 된다.</p></div></div>
-      <div class="hud rv"><div class="t"><b>UX 06</b><h3>기기별 경험</h3></div>
-        <div class="row"><span>ISSUE</span><p>PC용 HUD와 넓은 비교 화면을 모바일에 그대로 두면 화면이 복잡하고 조작이 어렵다.</p></div>
-        <div class="row r"><span>DESIGN</span><p>모바일은 HUD 요소를 줄이고 세로 한 열로 재배치했다. 화면이 좁을 때 소용돌이·캐릭터가 잘리지 않게 구도를 따로 잡고, 앱 목업 페이지로 모바일 경험을 따로 보여준다.</p></div>
-        <div class="row"><span>EFFECT</span><p>작은 화면에서도 핵심 비주얼과 조작이 유지된다.</p></div></div>
+      <article class="pn uc rv"><img src="vortexfall/scr_lifeform.webp" alt="섹션 번호 메뉴와 오른쪽 위치 표시가 있는 화면" loading="lazy"><div class="in"><span class="tag">UX 01</span><h3>긴 페이지에서 현재 위치 알기</h3><p class="p">섹션이 9개라 지금 어디쯤인지 알기 어렵다.</p><p class="s">번호 메뉴와 오른쪽 위치 점을 고정하고, 하늘의 시각(04:12 → 06:40)이 진행률이 되게 했다.</p></div></article>
+      <article class="pn uc rv"><img src="vortexfall/scr_world.webp" alt="두 세계 비교 슬라이더" loading="lazy"><div class="in"><span class="tag">UX 02</span><h3>설명 대신 직접 조작</h3><p class="p">"같은 좌표, 다른 법칙"은 글로 읽으면 추상적이다.</p><p class="s">두 세계는 드래그 비교, 에너지는 STABLE / UNSTABLE 전환으로 손으로 이해하게 했다.</p></div></article>
+      <article class="pn uc rv"><img src="vortexfall/scr_hero.webp" alt="상단 PRE-REGISTER 버튼과 히어로 사전예약 버튼" loading="lazy"><div class="in"><span class="tag">UX 03</span><h3>목표 행동을 항상 가까이</h3><p class="p">사전예약이 맨 끝에만 있으면 도중에 이탈한다.</p><p class="s">상단에 PRE-REGISTER를 고정하고 히어로에도 사전예약 버튼을 바로 두었다.</p></div></article>
     </div>
   </div>
 </section>
 
-<!-- 2. PROCESS -->
+<!-- 03 PROCESS -->
 <section id="process">
   <div class="wrap">
-    <div class="lbl rv">03 <i>//</i> PROCESS</div>
-    <h2 class="rv">HOW IT <em>EVOLVED</em></h2>
-    <p class="lead rv">완성된 화면은 처음 모습과 많이 다르다. 이름, 첫 화면, 로고, 캐릭터 제작 방식이 어떻게 바뀌었는지 단계별로 정리했다.</p>
+    <div class="sh rv"><span class="no">03</span><div class="tt"><small>PROCESS &amp; DECISION</small><h2>무엇이 <em>바뀌었고</em>, 왜</h2></div></div>
 
-    <div class="pstep">
-      <h3 class="rv"><small>P1</small>첫 화면의 변화</h3>
-      <p class="rv">처음에는 EVERGLOW라는 이름으로 코드로 그린 실루엣과 결정을 배치했다. 세계관이 "하늘에 열린 균열"로 정리되면서 이름을 VORTEXFALL로 바꾸고, 첫 화면도 세계관의 핵심 사건인 소용돌이를 보여주는 방향으로 다시 만들었다.</p>
-      <div class="step3">
-        <figure class="st rv"><span class="no">V1 · EVERGLOW</span><img src="vortexfall/evo_everglow.webp" alt="초기 EVERGLOW 히어로" loading="lazy"><figcaption><b>코드로 그린 화면</b>이름·톤 미확정. 실루엣과 결정을 코드로 그려 분위기를 잡음</figcaption></figure>
-        <figure class="st rv"><span class="no">V2 · VORTEXFALL</span><img src="vortexfall/evo_back.webp" alt="KAEL 뒷모습 히어로" loading="lazy"><figcaption><b>리네이밍 · 캐릭터 중심</b>KAEL의 뒷모습과 결정으로 "이야기가 시작되는 순간"을 연출</figcaption></figure>
-        <figure class="st now rv"><span class="no">NOW</span><img src="vortexfall/cover.webp" alt="최종 소용돌이 히어로" loading="lazy"><figcaption><b>세계관의 사건을 첫 화면에</b>도시 하늘에 열린 소용돌이 균열을 루프 영상으로 + 게임 HUD</figcaption></figure>
-      </div>
-    </div>
-
-    <div class="pstep">
-      <h3 class="rv"><small>P2</small>아이덴티티 결정</h3>
-      <p class="rv">워드마크는 여러 버전을 같은 배경에 놓고 비교했고, 엠블럼은 소용돌이를 해석하는 방식(날개형·터빈·나선)을 나눠 후보를 만들었다. 작은 크기에서도 읽히는 4날개 소용돌이를 최종으로 골랐다.</p>
-      <div class="idgrid">
-        <figure class="st rv"><span class="no">WORDMARK</span><img src="vortexfall/logo_variants.webp" alt="워드마크 후보 비교" loading="lazy"><figcaption><b>워드마크 후보</b>서체·장식·부제 조합 비교</figcaption></figure>
-        <figure class="st rv"><span class="no">EMBLEM</span><img src="vortexfall/emb_sheet.webp" alt="엠블럼 후보" loading="lazy"><figcaption><b>엠블럼 후보</b>컬러·실루엣 버전으로 크기별 가독성 확인</figcaption></figure>
-        <figure class="st now rv"><span class="no">FINAL</span><img src="vortexfall/logo_final.webp" alt="최종 로고" loading="lazy"><figcaption><b>최종</b>소용돌이 엠블럼을 O 자리에 넣은 메탈 워드마크</figcaption></figure>
-      </div>
-    </div>
-
-    <div class="pstep">
-      <h3 class="rv"><small>P3</small>AI 캐릭터를 사이트에 올리는 과정</h3>
-      <p class="rv">AI 영상은 배경까지 함께 생성되기 때문에 사이트 배경과 어울리지 않았다. 캐릭터를 초록 단색 배경으로 생성하고, 브라우저에서 WebGL로 실시간 배경을 제거해 사이트 위에 캐릭터만 띄웠다.</p>
-      <div class="pipe">
-        <figure class="st rv"><span class="no">01 GENERATE</span><img src="vortexfall/pipe_green.webp" alt="초록 배경으로 생성한 KAEL" loading="lazy"><figcaption><b>초록 배경 생성</b>Kling · 고정 카메라 · 머리카락과 에너지만 움직이는 루프</figcaption></figure>
+    <div class="pn blk rv">
+      <div class="hd"><span class="tag pk">P1</span><h3>첫 화면의 변화</h3><p>세계관이 "하늘에 열린 균열"로 정리되면서 이름을 EVERGLOW에서 VORTEXFALL로 바꾸고, 첫 화면도 그 사건을 보여주도록 다시 만들었다.</p></div>
+      <div class="steps">
+        <figure class="fr"><img src="vortexfall/evo_everglow.webp" alt="초기 EVERGLOW 히어로" loading="lazy"><figcaption><b>V1 · EVERGLOW</b>코드로 그린 실루엣과 결정</figcaption></figure>
         <span class="ar" aria-hidden="true">→</span>
-        <figure class="st rv"><span class="no">02 KEY</span><img src="vortexfall/pipe_key.webp" alt="배경을 제거한 KAEL" loading="lazy"><figcaption><b>배경 제거</b>WebGL 크로마키로 실시간 제거</figcaption></figure>
+        <figure class="fr"><img src="vortexfall/evo_back.webp" alt="KAEL 뒷모습 히어로" loading="lazy"><figcaption><b>V2 · VORTEXFALL</b>KAEL의 뒷모습으로 이야기의 시작</figcaption></figure>
         <span class="ar" aria-hidden="true">→</span>
-        <figure class="st now rv"><span class="no">03 SITE</span><img src="vortexfall/pipe_site.webp" alt="사이트에 적용된 KAEL" loading="lazy"><figcaption><b>사이트 적용</b>캐릭터 섹션 배경 위에 합성</figcaption></figure>
-      </div>
-      <p class="rv" style="margin:22px 0 14px;color:var(--mut)">스킬 영상도 같은 방식으로 만들고, 아카이온 본부의 훈련실 배경을 직접 합성해 모든 스킬이 같은 공간에서 보이도록 기준을 정했다.</p>
-      <div class="pair">
-        <figure class="st rv"><span class="no">GREEN</span><img src="vortexfall/q_green.webp" alt="초록 배경 스킬 영상" loading="lazy"><figcaption><b>원본</b>스킬 Q · OVERCLOCK DASH</figcaption></figure>
-        <figure class="st now rv"><span class="no">COMPOSITE</span><img src="vortexfall/q_final.webp" alt="훈련실 배경에 합성한 스킬 영상" loading="lazy"><figcaption><b>훈련실 합성</b>ARKHEON 훈련실 배경 + 발밑 그림자</figcaption></figure>
+        <figure class="fr now"><img src="vortexfall/cover.webp" alt="최종 소용돌이 히어로" loading="lazy"><figcaption><b>NOW</b>소용돌이 균열 루프 영상 + 게임 HUD</figcaption></figure>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- 3. DECISIONS -->
-<section id="decisions">
-  <div class="wrap">
-    <div class="lbl rv">04 <i>//</i> DECISIONS</div>
-    <h2 class="rv">WHAT I <em>CHOSE</em> AND WHY</h2>
-    <div class="dec">
-      <div class="dc hud rv">
+    <div class="pn blk rv">
+      <div class="hd"><span class="tag pk">P2</span><h3>AI 캐릭터를 사이트 위에 올리기</h3><p>AI 영상은 배경까지 함께 생성돼 사이트와 어울리지 않았다. 초록 단색 배경으로 생성하고 브라우저에서 WebGL로 실시간 배경을 제거해 캐릭터만 띄웠다.</p></div>
+      <div class="steps t3">
+        <figure class="fr tall"><img src="vortexfall/pipe_green.webp" alt="초록 배경으로 생성한 KAEL" loading="lazy"><figcaption><b>01 GENERATE</b>초록 배경, 고정 카메라 루프</figcaption></figure>
+        <span class="ar" aria-hidden="true">→</span>
+        <figure class="fr tall"><img src="vortexfall/pipe_key.webp" alt="배경을 제거한 KAEL" loading="lazy"><figcaption><b>02 KEY</b>WebGL 크로마키로 실시간 제거</figcaption></figure>
+        <span class="ar" aria-hidden="true">→</span>
+        <figure class="fr tall now"><img src="vortexfall/pipe_site.webp" alt="사이트에 적용된 KAEL" loading="lazy"><figcaption><b>03 SITE</b>캐릭터 섹션 배경 위에 합성</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="pn blk rv">
+      <div class="dec">
         <div class="vs">
-          <figure class="x2"><img src="vortexfall/char_coat.webp" alt="코트 의상 KAEL" loading="lazy"><figcaption>COAT</figcaption></figure>
-          <figure class="ok"><img src="vortexfall/scr_lifeform.webp" alt="검정 전술 슈트 KAEL" loading="lazy"><figcaption>TACTICAL SUIT</figcaption></figure>
+          <figure class="fr x2"><img src="vortexfall/char_coat.webp" alt="코트 의상 KAEL" loading="lazy"><figcaption><b>COAT</b>보류</figcaption></figure>
+          <figure class="fr now"><img src="vortexfall/scr_lifeform.webp" alt="검정 전술 슈트 KAEL" loading="lazy"><figcaption><b>TACTICAL SUIT</b>확정</figcaption></figure>
         </div>
-        <div class="chose"><span class="q">DECISION 01 · CHARACTER</span><h3>코트 vs 검정 전술 슈트</h3><p>흰 코트 버전은 화사하지만, 사이트의 어두운 배경 위에서 캐릭터의 실루엣과 시안 라인이 묻혔다.</p><p class="a">균열 대응 요원이라는 정체성과 "인공 신체 = 시안" 컬러 규칙이 가장 잘 드러나는 검정 전술 슈트로 확정. 코트는 다른 의상 후보로 보류.</p></div>
-      </div>
-      <div class="txtdec">
-        <div class="hud rv chose"><span class="q">DECISION 02 · SKILL VIDEO</span><h3>일부만 공개 vs 전부 준비 중</h3><p>스킬 6종 중 2종만 영상이 먼저 완성됐다.</p><p class="a">일부만 연결하면 완성도가 들쭉날쭉해 보여, 6종이 같은 배경 기준으로 완성될 때까지 전부 "준비 중"으로 통일.</p></div>
-        <div class="hud rv chose"><span class="q">DECISION 03 · PLAY LOOP</span><h3>카드 + 영상 vs 설명형</h3><p>04 섹션을 카드마다 짧은 인게임 영상을 넣는 형태로 시도했다.</p><p class="a">카드 안에 영상만 들어가 밋밋해 보여 원래 설명형으로 복귀. 섹션 재구성은 다음 과제로 분리.</p></div>
-        <div class="hud rv chose"><span class="q">DECISION 04 · RESPONSIVE</span><h3>일체형 vs 반응형 + 앱 목업</h3><p>PC 화면 안에 모바일 열을 띄우는 일체형 레이아웃도 만들어 봤다.</p><p class="a">게임 쇼케이스는 PC 화면을 넓게 쓰는 게 강점이라 반응형을 유지하고, 모바일은 별도 앱 목업 페이지로 보여주기로 결정.</p></div>
+        <div class="why">
+          <span class="tag pk">DECISION</span>
+          <h3 style="margin:0">코트 대신 검정 전술 슈트</h3>
+          <p>흰 코트는 화사하지만 어두운 배경 위에서 실루엣과 시안 라인이 묻혔다.</p>
+          <p class="a">균열 대응 요원이라는 정체성과 "인공 신체 = 시안" 컬러 규칙이 가장 잘 드러나는 슈트로 확정했다.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 4. RESULT -->
-<section id="result">
+<!-- 04 RESULT -->
+<section id="result" class="end">
   <div class="wrap">
-    <div class="lbl rv">05 <i>//</i> RESULT</div>
-    <h2 class="rv">THE <em>LAUNCH SITE</em></h2>
-    <div class="flow rv">
-      <div>INTRO<small>접속 연출</small></div><div>HERO<small>균열 루프</small></div><div>01 WORLD<small>두 세계 비교</small></div><div>02 ENERGY<small>상태 전환</small></div><div>03 KAEL<small>캐릭터·스킬</small></div><div>04 LOOP<small>플레이 흐름</small></div><div>05 SYSTEM<small>싱크·공명</small></div><div>MEDIA<small>트레일러·OST</small></div><div>PRE-REG<small>사전예약</small></div>
-    </div>
+    <div class="sh rv"><span class="no">04</span><div class="tt"><small>RESULT</small><h2>완성된 <em>런칭 사이트</em></h2></div></div>
     <div class="gal">
-      <figure class="wide rv sweep"><img src="vortexfall/scr_world.webp" alt="01 WORLD: 현실과 이면 세계 비교 슬라이더" loading="lazy"><figcaption><b>01 WORLD · 비교한다</b>같은 장소의 두 세계를 드래그로 비교. 스크롤에 따라 새벽 하늘이 밝아지는 시간 연출</figcaption></figure>
-      <figure class="rv"><img src="vortexfall/scr_energy.webp" alt="02 ENERGY" loading="lazy"><figcaption><b>02 ENERGY</b>STABLE / UNSTABLE 전환에 따라 방전·경보·파형이 바뀌는 분석실</figcaption></figure>
-      <figure class="rv"><img src="vortexfall/scr_media.webp" alt="MEDIA" loading="lazy"><figcaption><b>MEDIA</b>51초 트레일러, 직접 만든 테마 BGM과 OST 플레이어, 월페이퍼 5종</figcaption></figure>
+      <figure class="fr big rv"><img src="vortexfall/scr_world.webp" alt="01 WORLD 두 세계 비교" loading="lazy"><figcaption><b>01 WORLD</b>같은 장소의 두 세계를 드래그로 비교, 스크롤에 따라 하늘이 밝아짐</figcaption></figure>
+      <figure class="fr rv"><img src="vortexfall/scr_energy.webp" alt="02 ENERGY" loading="lazy"><figcaption><b>02 ENERGY</b>상태 전환에 따라 방전·경보·파형이 바뀌는 분석실</figcaption></figure>
+      <figure class="fr rv"><img src="vortexfall/scr_media.webp" alt="MEDIA" loading="lazy"><figcaption><b>MEDIA</b>트레일러, 직접 만든 BGM과 OST, 월페이퍼</figcaption></figure>
     </div>
-    <div class="devices rv">
+    <div class="pn mob rv">
       <div class="ph"><img src="vortexfall/m_hero.webp" alt="모바일 히어로 화면" loading="lazy"></div>
       <div class="ph"><img src="vortexfall/m_kael.webp" alt="모바일 캐릭터 화면" loading="lazy"></div>
-      <p>웹 · 모바일 반응형 · 앱 목업 페이지에서 WEB / APP 전환 · BGM과 효과음 개별 제어</p>
+      <div class="tx"><span class="tag">MOBILE</span><p>모바일은 HUD를 줄이고 세로 한 열로 재배치했다. 앱 목업 페이지에서 WEB / APP을 전환해 볼 수 있다.</p></div>
     </div>
-  </div>
-</section>
-<!-- 5. TOOLS -->
-<section id="tools">
-  <div class="wrap">
-    <div class="lbl rv">06 <i>//</i> TOOLS &amp; PROCESS</div>
-    <h2 class="rv">HOW IT WAS <em>BUILT</em></h2>
-    <div class="hud rv" style="padding:8px clamp(14px,2.4vw,24px)">
-      <table class="tools">
-        <thead><tr><th>STAGE</th><th>TOOL</th><th>어떻게 썼나</th></tr></thead>
-        <tbody>
-          <tr><td>PLANNING</td><td>Claude</td><td>세계관·캐릭터·스킬 설정 정리, 섹션 구성과 카피 작성</td></tr>
-          <tr><td>IMAGE</td><td>Gemini</td><td>도시·설원·소용돌이 같은 풍경과 키 비주얼</td></tr>
-          <tr><td>IMAGE</td><td>ChatGPT</td><td>결정체, 캐릭터 포즈, 영상용 시작 프레임 이미지</td></tr>
-          <tr><td>VIDEO</td><td>Kling</td><td>KAEL 캐릭터 루프·스킬 영상 (얼굴 일관성이 필요한 장면)</td></tr>
-          <tr><td>VIDEO</td><td>Google Flow</td><td>카메라 움직임과 군중이 있는 장면</td></tr>
-          <tr><td>VIDEO</td><td>Dreamina</td><td>불안정한 에너지 상태 영상</td></tr>
-          <tr><td>EDIT</td><td>ffmpeg</td><td>트리밍, 워터마크 처리, 루프 이음새 정리, 배경 합성</td></tr>
-          <tr><td>SOUND</td><td>Python + Claude</td><td>피아노·기타 음색 테마 BGM(48초 루프)과 효과음 세트 합성</td></tr>
-          <tr><td>DEV</td><td>Claude Code</td><td>HTML·CSS·JS 구현, three.js·GSAP 모션, WebGL 크로마키</td></tr>
-          <tr><td>DEPLOY</td><td>GitHub · Vercel</td><td>버전 관리와 자동 배포</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="proc rv"><span>기획 정리</span><i>→</i><span>컬러·캐릭터 기준 확정</span><i>→</i><span>AI 이미지 생성</span><i>→</i><span>시작 프레임으로 영상 생성</span><i>→</i><span>영상 편집</span><i>→</i><span>사이트 적용</span><i>→</i><span>화면 확인·수정 반복</span><i>→</i><span>배포</span></div>
-  </div>
-</section>
-
-<!-- 6. NEXT -->
-<section class="end" id="next">
-  <div class="wrap">
-    <div class="hud next rv sweep">
-      <div><div class="lbl" style="margin-bottom:10px">07 <i>//</i> NEXT MISSION</div><h3>앞으로 확장할 것</h3>
-        <ul class="big">
-          <li>스킬 영상 6종 완성 (훈련실 배경 기준)</li>
-          <li>KAEL 포함 캐릭터 10인 상세 페이지</li>
-          <li>세계관·미디어 등 서브 페이지 구축</li>
-          <li>팀 구성 인게임 화면</li>
-          <li>트레일러 영상 마무리</li>
-          <li>테마곡 · 트레일러 OST · 사이트 BGM 정리</li>
-          <li>04 PLAY LOOP 섹션 재구성</li>
-          <li>03 캐릭터 섹션: 캐릭터·스킬 영상 비주얼 재배치와 리디자인</li>
-        </ul></div>
-      <a class="go" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a>
+    <div class="pn wrapup rv" style="margin-top:14px">
+      <div><span class="tag">TOOLS</span><p>Claude(기획) · Gemini·ChatGPT(이미지) · Kling·Flow·Dreamina(영상) · ffmpeg(편집) · Python(사운드) · Claude Code(개발) · Vercel(배포)</p></div>
+      <div><span class="tag">NEXT</span><p>캐릭터 상세·세계관·미디어 서브 페이지, 스킬 영상 6종, 팀 편성 화면, 트레일러 완성</p></div>
+      <div class="btns">
+        <a class="go pri" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a>
+        <a class="go sec" href="vortexfall/planning.pdf" target="_blank" rel="noopener">기획서 PDF <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -437,7 +254,7 @@ h3{margin:0 0 8px;font:700 18px/1.4 var(--body)}
 
 <script>
 (function(){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
   function close(){ if(window.parent!==window){ window.parent.postMessage({type:'case-close'},'*') } else { location.href='../#p3' } }
   document.getElementById('close').addEventListener('click',close);
