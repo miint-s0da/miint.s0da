@@ -26,6 +26,11 @@
 | CONTACT | 폼 양식 그대로 |
 | CASE STUDY 팝업 | `case/이름.html` 방식 그대로. 프로젝트마다 하나씩 |
 
+## BUILD TRACK 자료 위치
+- 프로젝트별 레이어 이미지와 영상: `build/<프로젝트>/` (규격은 `SITE_CLEANUP_GUIDE.md`)
+- **VORTEXFALL 준비 완료**: `build/vortexfall/vortexfall_01_plan.webp`, `_02_structure.webp`, `_03_visual.webp`, `_04_live.webp`, `_04_live.mp4` (모두 1440×900)
+- 나머지 프로젝트는 각 사이트 대화창에서 같은 규격으로 만들어 이 폴더에 넣는다.
+
 ## 새로 만들 것
 
 ### 01 SELECTED WORKS — BUILD TRACK (핵심)
