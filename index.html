@@ -323,13 +323,13 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
    ========================================================= */
 .track{position:relative;z-index:2;--k:0;--p:1}
 .stage{position:relative;max-width:1280px;margin:0 auto;padding:100px 24px 90px;display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr) 44px;gap:28px;align-items:center;min-height:100vh;min-height:100svh}
-.stage .copy{max-width:440px}
+.stage .copy{max-width:440px;position:relative;z-index:10}
 .nb{margin:26px 0 0;font:600 11px/1.6 var(--f-mono);letter-spacing:.12em;color:var(--mut);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
 .nb-k{color:var(--acc)}
 .nb-s{color:var(--fg)}
 .nb-d{letter-spacing:.02em;font-family:var(--f-sans);font-size:13px;color:var(--mut)}
 .lays{position:relative;height:min(62vh,560px)}
-.lay{position:absolute;left:50%;top:50%;margin:0;width:min(100%,540px);aspect-ratio:16/10;transform:translate(-50%,-50%) translate(calc((1 - var(--k)) * var(--sx) * 1px),calc((1 - var(--k)) * var(--sy) * 1px)) rotate(calc((1 - var(--k)) * var(--sr) * 1deg));z-index:var(--z);transition:filter .4s,opacity .4s}
+.lay{position:absolute;left:50%;top:50%;margin:0;width:min(100%,540px);aspect-ratio:16/10;transform:translate(-50%,-50%) translate(calc((1 - var(--k)) * var(--sx) * .4px),calc((1 - var(--k)) * var(--sy) * .4px)) rotate(calc((1 - var(--k)) * var(--sr) * .6deg));z-index:var(--z);transition:filter .4s,opacity .4s}
 .lay-ph{position:absolute;inset:0;display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:14px;background:color-mix(in srgb,var(--bg) 90%,var(--acc) 10%);font:600 11px/1.4 var(--f-mono);letter-spacing:.1em;color:var(--mut);text-align:center;padding:16px;box-shadow:0 18px 40px rgb(0 0 0/.18)}
 .lay-tag{position:absolute;left:0;top:-30px;font:700 11px/1 var(--f-mono);letter-spacing:.14em;color:var(--mut);white-space:nowrap}
 .lay.on .lay-tag{color:var(--acc)}
@@ -511,21 +511,21 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
   <div class="stage">
     <div class="copy">
       <div class="row"><span class="chip">PROJECT 01</span><span class="cat">브랜드 · 플랫폼</span></div>
-      <h3 class="ttl" data-split>UNI+ON</h3>
+      <h3 class="ttl">UNI+ON</h3>
       <p class="tag">게임·웹툰 굿즈가 흩어져 찾기 어려운 문제를, 카테고리 탐색에서 장바구니까지 이어지는 하나의 흐름으로 해결</p>
       <p class="desc">굵은 외곽선과 오프셋 그림자의 팝 그래픽으로 흩어진 문화 콘텐츠를 하나의 탐색 체계로 묶었습니다. 메인과 서브 페이지, 장바구니까지 이어지는 사용자 흐름을 설계하고 데스크톱부터 모바일까지 같은 경험으로 구현했습니다.</p>
       <ul class="tags"><li>카테고리 탐색</li><li>커머스 동선</li><li>반응형</li></ul>
       <div class="foot"><span class="state">완료</span><a class="cta" href="case/uni-on.html" data-case="uni-on">CASE STUDY <span aria-hidden="true">→</span></a><a class="cta ghost" href="https://unionverse.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a></div>
-      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
+      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">PLAN</b> <span class="nb-d">무드와 구조를 스케치</span></p>
     </div>
     <div class="lays">
-<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><div class="lay-ph" aria-hidden="true">SKETCH 이미지 자리 · 가로 16:10</div></figure>
-<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><div class="lay-ph" aria-hidden="true">WIRE 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 PLAN</figcaption><div class="lay-ph" aria-hidden="true">PLAN 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 STRUCTURE</figcaption><div class="lay-ph" aria-hidden="true">STRUCTURE 이미지 자리 · 가로 16:10</div></figure>
 <figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><div class="lay-ph" aria-hidden="true">VISUAL 이미지 자리 · 가로 16:10</div></figure>
 <figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><div class="lay-ph" aria-hidden="true">LIVE 이미지 자리 · 가로 16:10</div></figure>
     </div>
     <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n on" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a></nav>
-    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
+    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% PLAN</span><span>33% STRUCTURE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
 
@@ -534,22 +534,22 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
   <div class="stage">
     <div class="copy">
       <div class="row"><span class="chip">PROJECT 02</span><span class="cat">캐릭터 IP · 브랜드</span></div>
-      <h3 class="ttl" data-split>PIXELINK</h3>
+      <h3 class="ttl">PIXELINK</h3>
       <p class="slogan">PIXEL + NEON, LINKED.</p>
       <p class="tag">캐릭터 하나로 브랜드를 만들 때 글 없이도 성격이 전달되도록, 인트로·커서·호버를 캐릭터 경험으로 설계</p>
       <p class="desc">UNI+ON의 히어로 캐릭터에서 출발한 독립 브랜드입니다. 레트로 픽셀 감성에 파스텔 네온을 더한 BI와 세계관을 설계하고, 픽셀 커서와 호버 인터랙션으로 캐릭터의 개성을 사이트 전체에 입혔습니다.</p>
       <ul class="tags"><li>캐릭터 경험 설계</li><li>브랜드 확장 구조</li><li>인터랙션</li></ul>
       <div class="foot"><span class="state">제작 중 · 재작업 예정</span><a class="cta" href="case/pixelink.html" data-case="pixelink">CASE STUDY <span aria-hidden="true">→</span></a><a class="cta ghost" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a></div>
-      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
+      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">PLAN</b> <span class="nb-d">무드와 구조를 스케치</span></p>
     </div>
     <div class="lays">
-<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><img src="build/pixelink/pixelink_01_plan.webp" alt="PIXELINK 01 PLAN — 기획·무드보드" loading="lazy"></figure>
-<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><img src="build/pixelink/pixelink_02_structure.webp" alt="PIXELINK 02 STRUCTURE — 와이어프레임" loading="lazy"></figure>
+<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 PLAN</figcaption><img src="build/pixelink/pixelink_01_plan.webp" alt="PIXELINK 01 PLAN — 기획·무드보드" loading="lazy"></figure>
+<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 STRUCTURE</figcaption><img src="build/pixelink/pixelink_02_structure.webp" alt="PIXELINK 02 STRUCTURE — 와이어프레임" loading="lazy"></figure>
 <figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><img src="build/pixelink/pixelink_03_visual.webp" alt="PIXELINK 03 VISUAL — 이전 버전 화면" loading="lazy"></figure>
 <figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><video src="build/pixelink/pixelink_04_live.mp4" poster="build/pixelink/pixelink_04_live.webp" autoplay muted loop playsinline preload="metadata" aria-label="PIXELINK 04 LIVE — 첫 화면 스크롤 영상"></video></figure>
     </div>
     <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n on" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a></nav>
-    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
+    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% PLAN</span><span>33% STRUCTURE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
 
@@ -558,21 +558,21 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
   <div class="stage">
     <div class="copy">
       <div class="row"><span class="chip">PROJECT 03</span><span class="cat">게임 IP · 시네마틱</span></div>
-      <h3 class="ttl" data-split>VORTEXFALL</h3>
+      <h3 class="ttl">VORTEXFALL</h3>
       <p class="tag">낯선 세계관을 글로 설명하는 대신, 직접 비교하고 조작하며 이해하는 원페이지 런칭 흐름으로 설계</p>
       <p class="desc">차원 균열로 분리된 두 세계와 인공 생명체 카엘을 중심으로, 세계관·원초 에너지·캐릭터·게임 시스템을 시네마틱 원페이지 웹사이트로 구현한 오리지널 게임 IP 프로젝트.</p>
       <ul class="tags"><li>체험형 스토리텔링</li><li>원페이지 흐름 설계</li><li>직접 조작 UI</li></ul>
       <div class="foot"><span class="state">제작 중</span><a class="cta" href="case/vortexfall.html" data-case="vortexfall">CASE STUDY <span aria-hidden="true">→</span></a><a class="cta ghost" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a></div>
-      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
+      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">PLAN</b> <span class="nb-d">무드와 구조를 스케치</span></p>
     </div>
     <div class="lays">
-<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><img src="build/vortexfall/vortexfall_01_plan.webp" alt="VORTEXFALL 01 PLAN — 기획·무드보드" loading="lazy"></figure>
-<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><img src="build/vortexfall/vortexfall_02_structure.webp" alt="VORTEXFALL 02 STRUCTURE — 현재 사이트 와이어프레임" loading="lazy"></figure>
+<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 PLAN</figcaption><img src="build/vortexfall/vortexfall_01_plan.webp" alt="VORTEXFALL 01 PLAN — 기획·무드보드" loading="lazy"></figure>
+<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 STRUCTURE</figcaption><img src="build/vortexfall/vortexfall_02_structure.webp" alt="VORTEXFALL 02 STRUCTURE — 현재 사이트 와이어프레임" loading="lazy"></figure>
 <figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><img src="build/vortexfall/vortexfall_03_visual.webp" alt="VORTEXFALL 03 VISUAL — 이전 버전 화면" loading="lazy"></figure>
 <figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><video src="build/vortexfall/vortexfall_04_live.mp4" poster="build/vortexfall/vortexfall_04_live.webp" autoplay muted loop playsinline preload="metadata" aria-label="VORTEXFALL 04 LIVE — 첫 화면 스크롤 영상"></video></figure>
     </div>
     <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n on" href="#p3" aria-label="PROJECT 03">03</a></nav>
-    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
+    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% PLAN</span><span>33% STRUCTURE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
 
@@ -2582,7 +2582,7 @@ var m=location.hash.match(/^#case\/([\w-]+)$/);if(m)open(m[1],true);})();
 /* BUILD TRACK 진행도: 스크롤 위치 → --k(0~1) → 단계(SKETCH/WIRE/VISUAL/LIVE) */
 (() => {
   const tracks = [...document.querySelectorAll('.track')];
-  const NAMES = ['SKETCH','WIRE','VISUAL','LIVE'];
+  const NAMES = ['PLAN','STRUCTURE','VISUAL','LIVE'];
   const DESCS = ['무드와 구조를 스케치','화면 흐름을 와이어로 정리','그래픽과 시안 적용','실제 사이트로 구현'];
   const desk = () => matchMedia('(min-width: 820px) and (prefers-reduced-motion: no-preference)').matches;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
