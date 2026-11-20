@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIXELINK — Case Study · miint.s0da</title>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<style>
+:root{--bg:#F4F7FF;--ink:#1F2233;--pink:#FF4D9D;--cy:#00D1FF;--yel:#FFE66D;--mut:#5A6078}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.7 'Noto Sans KR',system-ui,sans-serif;word-break:keep-all;background-image:radial-gradient(#FF4D9D22 1.2px,transparent 1.2px);background-size:24px 24px}
+.close{position:fixed;top:14px;right:14px;z-index:5;width:44px;height:44px;border-radius:50%;border:3px solid var(--ink);background:var(--yel);font:800 18px/1 system-ui;cursor:pointer;box-shadow:4px 4px 0 var(--ink)}
+main{max-width:980px;margin:0 auto;padding:76px 24px 96px}
+section{margin:0 0 54px}
+.sticker{display:inline-block;background:var(--pink);color:#fff;border:3px solid #fff;border-radius:999px;padding:6px 14px;font:800 12px/1 system-ui;letter-spacing:.06em;box-shadow:3px 3px 0 var(--ink);transform:rotate(-2deg)}
+h1{font:800 clamp(3rem,10vw,6rem)/1 system-ui;margin:20px 0 8px;color:var(--pink);text-shadow:4px 4px 0 var(--cy)}
+.sub{font-weight:700;margin:0 0 22px}
+h2{font:800 1.5rem/1.2 system-ui;margin:0 0 14px}
+h2 small{display:block;font:800 11px/1 system-ui;letter-spacing:.12em;color:var(--pink);margin-bottom:6px}
+.panel{background:#fff;border:3px solid #fff;outline:2px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);padding:20px 22px;margin-bottom:18px}
+.pol{background:#fff;padding:12px 12px 40px;box-shadow:0 10px 24px #1F223326;transform:rotate(-1.2deg);margin:0 0 20px;position:relative}
+.pol img{display:block;width:100%;height:auto;border-radius:4px}
+.pol figcaption{position:absolute;left:14px;right:14px;bottom:12px;font:700 13px/1.3 system-ui;color:var(--ink)}
+.pol:nth-of-type(even){transform:rotate(1deg)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ux{display:grid;gap:14px}
+.ux .panel{margin:0}
+.ux b{color:var(--pink)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border:2px solid var(--ink);padding:10px 12px;text-align:left;vertical-align:top;background:#fff}
+th{background:var(--yel)}
+.go{display:inline-block;margin:8px 10px 0 0;background:var(--cy);color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:12px 20px;font-weight:800;text-decoration:none;box-shadow:4px 4px 0 var(--ink)}
+.go.alt{background:#fff}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+@keyframes pop{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.03)}100%{transform:none;opacity:1}}
+.panel,.pol{animation:pop .45s cubic-bezier(.2,.9,.3,1.3) both}
+</style>
+</head>
+<body>
+<button class="close" type="button" aria-label="닫기" onclick="parent.postMessage({type:'case-close'},'*')">✕</button>
+<main>
+
+<section>
+  <span class="sticker">CASE STUDY · 02</span>
+  <h1>PIXELINK</h1>
+  <p class="sub">PIXEL + NEON, LINKED. 픽셀 레트로와 사이버팝을 섞은 오리지널 캐릭터 IP 브랜드 사이트</p>
+  <figure class="pol"><img src="pixelink/img/result1_hero.webp" alt="PIXELINK 히어로"><figcaption>커버 · 쇼룸 히어로</figcaption></figure>
+  <div class="panel">
+    <table>
+      <tr><th>유형</th><td>오리지널 캐릭터 IP 브랜드 사이트 (인트로 + 메인 + 서브페이지)</td></tr>
+      <tr><th>역할</th><td>기획·브랜드 방향·디자인 디렉션: miint.s0da · 개발: Claude Code</td></tr>
+      <tr><th>기술</th><td>HTML / CSS / JavaScript 단일 파일, WebAudio, PWA, Vercel</td></tr>
+      <tr><th>상태</th><td>재작업 중, 1차 오픈 전</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><small>01 · CHALLENGE</small>왜 만들었나</h2>
+  <div class="panel"><p style="margin:0 0 10px"><b>과제</b> — 인트로부터 메인까지 한 번에 이어지고, 굿즈 소개가 우선이면서 캐릭터를 직접 만져 보는 경험을 갖는 사이트.</p>
+  <p style="margin:0"><b>목표</b> — 캐릭터(CHI:EE · LEENKI · GLEEN)를 소개하고, 입어 보기 → 알게 되기 → 모으기 → 갖기(실물 굿즈)로 이어지는 흐름의 첫 단계를 만든다.</p></div>
+</section>
+
+<section>
+  <h2><small>02 · UX</small>사용자 흐름과 근거</h2>
+  <div class="panel" style="margin-bottom:18px"><p style="margin:0"><b>흐름</b> — 인트로(카세트 삽입) → 메인 히어로 PRESS START → 캐릭터·아트워크·월드·굿즈 탐색 → 드레스룸에서 CHI:EE 입혀 보기</p></div>
+  <div class="ux">
+    <div class="panel"><figure class="pol" style="margin:0 0 12px"><img src="pixelink/img/ux1_intro.webp" alt="인트로"><figcaption>인트로 — 카세트 삽입</figcaption></figure>
+      <p style="margin:0"><b>문제</b> 방문할 때마다 인트로가 나오면 메인을 확인하는 데 방해가 된다.<br><b>해결</b> 처음 방문에만 30일간 1회, SKIP 버튼·Esc, 메인의 INTRO 버튼으로 다시 보기.</p></div>
+    <div class="panel"><figure class="pol" style="margin:0 0 12px"><img src="pixelink/img/ux2_sound.webp" alt="소리 잠금 표시"><figcaption>소리 잠금 표시</figcaption></figure>
+      <p style="margin:0"><b>문제</b> PC 브라우저는 첫 클릭 전에 소리를 막고, 섹션마다 소리 크기가 달라 어떤 곳은 거의 안 들린다.<br><b>해결</b> 첫 클릭에서 소리를 열고 잠금 상태를 표시, 소리마다 크기를 측정해 맞추고 5단계 볼륨 + 음소거 추가.</p></div>
+    <div class="panel"><figure class="pol" style="margin:0 0 12px"><img src="pixelink/img/ux3_hover.webp" alt="호버 반응"><figcaption>섹션별 호버 반응</figcaption></figure>
+      <p style="margin:0"><b>문제</b> 모든 카드가 같은 호버라 단조롭고, 떠오르며 빛나는 호버는 다른 사이트와 겹친다.<br><b>해결</b> 섹션·캐릭터마다 다른 통통 반응과 효과음, 빛 효과 제거.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2><small>03 · PROCESS & DECISION</small>바뀐 과정과 선택</h2>
+  <div class="grid2">
+    <figure class="pol" style="margin:0"><img src="pixelink/img/before_characters.webp" alt="전: 타이틀바가 있는 카드"><figcaption>전 — 타이틀바(● ● ●)와 로딩 구분선</figcaption></figure>
+    <figure class="pol" style="margin:0"><img src="pixelink/img/result2_characters.webp" alt="후: 스티커 배지 카드"><figcaption>후 — 타이틀바·구분선 제거, 스티커 배지</figcaption></figure>
+  </div>
+  <div class="panel" style="margin-top:18px"><p style="margin:0"><b>커서</b> 전: 28px 시안 링 + 핑크 점 → 후: 린키 전신 픽셀 스프라이트가 마우스를 따라다님(인트로 포함).</p></div>
+  <div class="panel"><figure class="pol" style="margin:0 0 12px"><img src="pixelink/img/extra_dress.webp" alt="드레스룸"><figcaption>드레스룸 — 서브페이지 dress.html</figcaption></figure>
+    <p style="margin:0"><b>A 대신 B</b> 드레스룸을 메인에 두는 대신 서브페이지로 분리했다. 메인에 두면 정보가 많아 산만해 보여서, 메인에는 입구 배너만 남기고 놀이 공간은 따로 둔다.</p></div>
+</section>
+
+<section>
+  <h2><small>04 · RESULT</small>핵심 화면</h2>
+  <div class="grid2">
+    <figure class="pol" style="margin:0"><img src="pixelink/img/result3_goods.webp" alt="굿즈"><figcaption>GOODS</figcaption></figure>
+    <figure class="pol" style="margin:0"><img src="pixelink/img/result4_mobile.webp" alt="모바일 화면"><figcaption>모바일 · 반응형, 홈 화면 추가 지원</figcaption></figure>
+  </div>
+  <div class="panel" style="margin-top:18px"><p style="margin:0"><b>툴</b> 개발: Claude Code (기획·디자인 디렉션은 직접) · Notion(기획) · Gemini / ChatGPT(초안·히어로 시안) · Playwright(렌더링 확인) · GitHub · Vercel</p>
+  <p style="margin:10px 0 0"><b>다음 계획</b> 드레스룸을 아이템별 레이어 종이인형으로 확장하고 도감·코디 카드를 더한다. 실물 굿즈 연결은 <span style="color:var(--mut)">(추후)</span>.</p></div>
+  <a class="go" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener">사이트 보기 ↗</a>
+  <a class="go alt" href="pixelink/planning.pdf" target="_blank" rel="noopener">기획서 PDF</a>
+</section>
+
+</main>
+</body>
+</html>

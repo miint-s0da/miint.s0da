@@ -317,6 +317,85 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 #caseOverlay{position:fixed;inset:0;z-index:10001;background:#0E1030;opacity:0;transform:translateY(24px);transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1)}
 #caseOverlay.on{opacity:1;transform:none}
 #caseOverlay iframe{width:100%;height:100%;border:0;display:block}
+/* =========================================================
+   BUILD TRACK: 프로젝트 1개 = 화면 1개 고정, 스크롤 진행 = 제작 진행
+   데스크톱은 sticky로 고정하고, 모바일·움직임 줄이기는 4장을 세로로 나란히 보여줍니다.
+   ========================================================= */
+.track{position:relative;z-index:2;--k:0;--p:1}
+.stage{position:relative;max-width:1280px;margin:0 auto;padding:100px 24px 90px;display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr) 44px;gap:28px;align-items:center;min-height:100vh;min-height:100svh}
+.stage .copy{max-width:440px}
+.nb{margin:26px 0 0;font:600 11px/1.6 var(--f-mono);letter-spacing:.12em;color:var(--mut);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.nb-k{color:var(--acc)}
+.nb-s{color:var(--fg)}
+.nb-d{letter-spacing:.02em;font-family:var(--f-sans);font-size:13px;color:var(--mut)}
+.lays{position:relative;height:min(62vh,560px)}
+.lay{position:absolute;left:50%;top:50%;margin:0;width:min(100%,540px);aspect-ratio:16/10;transform:translate(-50%,-50%) translate(calc((1 - var(--k)) * var(--sx) * 1px),calc((1 - var(--k)) * var(--sy) * 1px)) rotate(calc((1 - var(--k)) * var(--sr) * 1deg));z-index:var(--z);transition:filter .4s,opacity .4s}
+.lay-ph{position:absolute;inset:0;display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:14px;background:color-mix(in srgb,var(--bg) 90%,var(--acc) 10%);font:600 11px/1.4 var(--f-mono);letter-spacing:.1em;color:var(--mut);text-align:center;padding:16px;box-shadow:0 18px 40px rgb(0 0 0/.18)}
+.lay-tag{position:absolute;left:0;top:-30px;font:700 11px/1 var(--f-mono);letter-spacing:.14em;color:var(--mut);white-space:nowrap}
+.lay.on .lay-tag{color:var(--acc)}
+.lay:not(.on) .lay-tag{opacity:0}
+.lay:not(.on){opacity:.6}
+.lay .lay-ph{background-color:var(--bg)}
+.lay.on{box-shadow:0 0 0 2px var(--acc)}
+.dial{display:flex;flex-direction:column;gap:12px;align-items:center}
+.dial-n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);font:700 12px/1 var(--f-mono);color:var(--mut);transition:background .25s,color .25s,border-color .25s}
+.dial-n:hover{border-color:var(--acc);color:var(--fg)}
+.dial-n.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.ruler{position:absolute;left:24px;right:24px;bottom:28px;max-width:1232px;margin:0 auto}
+.rbar{height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.rbar i{display:block;height:100%;width:calc(var(--k) * 100%);background:var(--acc)}
+.rlabels{display:flex;justify-content:space-between;margin-top:10px;font:600 10.5px/1 var(--f-mono);letter-spacing:.1em;color:var(--mut)}
+.rlabels span:first-child{color:var(--fg)}
+
+/* 데스크톱 + 움직임 허용: 고정 스크롤 */
+@media(min-width:820px) and (prefers-reduced-motion:no-preference){
+  .track{height:320vh}
+  .stage{position:sticky;top:0;height:100vh;height:100svh;min-height:0;padding-bottom:110px}
+  .stage .copy>*{opacity:clamp(0,calc(var(--p) * 1.7 - .35),1)}
+  /* 레이어가 합쳐져 이미지가 확정되면 좌측 텍스트를 희미하게 */
+  .stage .copy{opacity:calc(1 - var(--f,0) * .8);filter:blur(calc(var(--f,0) * 2.5px))}
+}
+/* 모바일 또는 움직임 줄이기: 고정 없이 4장을 세로로 */
+@media(max-width:819px),(prefers-reduced-motion:reduce){
+  .track{padding:0}
+  .stage{display:block;padding:max(46vh,320px) 24px 80px;min-height:0}
+  .stage .copy{max-width:none}
+  .lays{height:auto;display:grid;gap:34px;margin-top:40px}
+  .lay{position:relative;left:auto;top:auto;transform:none;width:100%;margin:0}
+  .lay:not(.on){opacity:1}
+  .lay.on{box-shadow:none}
+  .lay-tag{position:static;margin-bottom:10px;display:block}
+  .dial,.ruler{display:none}
+  .nb{margin-top:22px}
+}
+/* MORE WORKS: 세로 띠 아코디언 (데스크톱: 호버/포커스로 펼침, 모바일: 가로 스와이프) */
+.more{position:relative;z-index:2;padding:120px max(24px,env(safe-area-inset-left)) 110px}
+.more-ttl{margin:0 0 36px;font:800 clamp(2rem,4.4vw,3.4rem)/1.05 var(--f-display);letter-spacing:-.02em}
+.more-strips{display:flex;gap:10px;height:min(64vh,560px)}
+.strip{position:relative;flex:1 1 0;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:rgb(var(--bgv)/.7);cursor:pointer;transition:flex .6s cubic-bezier(.2,.8,.2,1),border-color .25s;outline:none}
+.strip:hover,.strip:focus-visible,.strip.open{flex:5;border-color:var(--acc)}
+.s-num{position:absolute;left:14px;top:16px;font:700 11px/1 var(--f-mono);color:var(--acc);letter-spacing:.1em}
+.s-title{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);writing-mode:vertical-rl;font:800 clamp(1.1rem,2vw,1.6rem)/1 var(--f-display);letter-spacing:.02em;white-space:nowrap;transition:opacity .3s}
+.strip:hover .s-title,.strip:focus-visible .s-title,.strip.open .s-title{opacity:0}
+.s-body{position:absolute;inset:0;padding:56px 28px 28px;display:flex;flex-direction:column;gap:18px;opacity:0;transition:opacity .4s .15s;pointer-events:none}
+.strip:hover .s-body,.strip:focus-visible .s-body,.strip.open .s-body{opacity:1;pointer-events:auto}
+.s-ph{flex:1;min-height:0;display:grid;place-items:center;border:1.5px dashed var(--line);border-radius:10px;font:600 11px/1.4 var(--f-mono);letter-spacing:.1em;color:var(--mut);background:var(--bg)}
+.s-title{font-family:var(--f-display)}
+.s-desc{margin:0;font-size:14px;color:var(--mut)}
+.strip .cta{align-self:flex-start}
+@media(max-width:819px){
+  .more{padding-top:90px}
+  .more-strips{height:auto;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:24px;padding-bottom:12px;margin:0 -24px;padding-left:24px;padding-right:24px;scrollbar-width:none}
+  .more-strips::-webkit-scrollbar{display:none}
+  .strip{flex:0 0 78vw;height:440px;scroll-snap-align:start}
+  .strip:hover,.strip:focus-visible,.strip.open{flex:0 0 78vw}
+  .s-title{position:static;transform:none;writing-mode:horizontal-tb;margin:44px 0 0 28px;font-size:1.3rem}
+  .s-body{position:static;opacity:1;pointer-events:auto;padding:14px 28px 28px;height:calc(100% - 96px)}
+  .s-num{top:18px;left:auto;right:20px}
+  .strip:hover .s-title,.strip:focus-visible .s-title,.strip.open .s-title{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){.strip,.s-body,.s-title{transition:none}}.steps em{display:block;margin-top:8px;font:500 11px/1.5 var(--f-mono);font-style:normal;color:var(--mut)}
+.lay>img,.lay>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;background:var(--bg)}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap" rel="stylesheet">
 </head>
@@ -382,7 +461,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 <section id="hero">
   <div id="pxgrid" aria-hidden="true"></div>
   <div class="hcard hc1" data-depth="-0.05"><div style="display:flex;justify-content:space-between"><small>LAYER_Z: 04</small><small>●</small></div><b>KINETIC TYPO +<br>SPATIAL MOTION</b></div>
-  <div class="hcard hc2" data-depth="0.04"><small>ARCHIVE // 2026</small><b>3 SELECTED WORKS</b></div>
+  <div class="hcard hc2" data-depth="0.04"><small>ARCHIVE // 2026</small><b>4 SELECTED WORKS</b></div>
 
   <div class="wrap hero-meta">
     <span class="pill">GRAPHIC SYSTEM &amp; INTERACTIVE DESIGN</span>
@@ -400,7 +479,7 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
 
   <div class="wrap hero-foot">
     <div class="btns">
-      <a class="btn fill" href="#p1"><span>VIEW SELECTED WORKS (03)</span><span aria-hidden="true">↓</span></a>
+      <a class="btn fill" href="#p1"><span>VIEW SELECTED WORKS (04)</span><span aria-hidden="true">↓</span></a>
       <a class="btn line" href="#aboutme" data-about="profile">CREATOR PROFILE →</a>
     </div>
     <div class="role">ESTP CREATIVE DIRECTOR · DESIGN TO CODE</div>
@@ -412,56 +491,121 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
     <span>✦ UNI+ON</span><span>// 문화 IP 플랫폼</span>
     <span>✦ PIXELINK</span><span>// 캐릭터 IP 브랜드</span>
     <span>✦ VORTEXFALL</span><span>// 게임 IP 콘셉트</span>
+    <span>✦ GYEOL</span><span>// 스페이스 라이프스타일 · WORK IN PROGRESS</span>
     <span>✦ VISUAL WORLDS IN MOTION</span>
     <span>✦ UNI+ON</span><span>// 문화 IP 플랫폼</span>
     <span>✦ PIXELINK</span><span>// 캐릭터 IP 브랜드</span>
     <span>✦ VORTEXFALL</span><span>// 게임 IP 콘셉트</span>
+    <span>✦ GYEOL</span><span>// 스페이스 라이프스타일 · WORK IN PROGRESS</span>
     <span>✦ VISUAL WORLDS IN MOTION</span>
   </div>
 </div>
 
-<!-- ============== PROJECT 01 · UNI+ON ============== -->
-<section class="proj" id="p1" data-ch="1">
-  <div class="proj-in">
-    <div class="num" aria-hidden="true">01</div>
+<!-- ============== PROJECT 01 · BUILD TRACK ============== -->
+<section class="track" id="p1" data-ch="1">
+  <div class="stage">
     <div class="copy">
       <div class="row"><span class="chip">PROJECT 01</span><span class="cat">브랜드 · 플랫폼</span></div>
       <h3 class="ttl" data-split>UNI+ON</h3>
-      <p class="tag">게임·웹툰·애니메이션·캐릭터·굿즈·크리에이터를 한곳에서 탐색하는 문화 IP 플랫폼</p>
+      <p class="tag">게임·웹툰 굿즈가 흩어져 찾기 어려운 문제를, 카테고리 탐색에서 장바구니까지 이어지는 하나의 흐름으로 해결</p>
       <p class="desc">굵은 외곽선과 오프셋 그림자의 팝 그래픽으로 흩어진 문화 콘텐츠를 하나의 탐색 체계로 묶었습니다. 메인과 서브 페이지, 장바구니까지 이어지는 사용자 흐름을 설계하고 데스크톱부터 모바일까지 같은 경험으로 구현했습니다.</p>
-      <ul class="tags"><li>브랜드 UX</li><li>팝 그래픽</li><li>반응형 웹</li></ul>
-      <div class="foot"><span class="state">완료</span><a class="cta" href="https://unionverse.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">→</span></a></div>
+      <ul class="tags"><li>카테고리 탐색</li><li>커머스 동선</li><li>반응형</li></ul>
+      <div class="foot"><span class="state">완료</span><a class="cta" href="case/uni-on.html" data-case="uni-on">CASE STUDY <span aria-hidden="true">→</span></a><a class="cta ghost" href="https://unionverse.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a></div>
+      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
     </div>
+    <div class="lays">
+<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><div class="lay-ph" aria-hidden="true">SKETCH 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><div class="lay-ph" aria-hidden="true">WIRE 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><div class="lay-ph" aria-hidden="true">VISUAL 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><div class="lay-ph" aria-hidden="true">LIVE 이미지 자리 · 가로 16:10</div></figure>
+    </div>
+    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n on" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n" href="#p4" aria-label="PROJECT 04">04</a></nav>
+    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
 
-<!-- ============== PROJECT 02 · PIXELINK ============== -->
-<section class="proj" id="p2" data-ch="2">
-  <div class="proj-in">
-    <div class="num" aria-hidden="true">02</div>
+<!-- ============== PROJECT 02 · BUILD TRACK ============== -->
+<section class="track" id="p2" data-ch="2">
+  <div class="stage">
     <div class="copy">
       <div class="row"><span class="chip">PROJECT 02</span><span class="cat">캐릭터 IP · 브랜드</span></div>
       <h3 class="ttl" data-split>PIXELINK</h3>
       <p class="slogan">PIXEL + NEON, LINKED.</p>
-      <p class="tag">치이(CHI:EE)와 픽셀 세계를 잇는 오리지널 캐릭터 IP 브랜드 사이트</p>
+      <p class="tag">캐릭터 하나로 브랜드를 만들 때 글 없이도 성격이 전달되도록, 인트로·커서·호버를 캐릭터 경험으로 설계</p>
       <p class="desc">UNI+ON의 히어로 캐릭터에서 출발한 독립 브랜드입니다. 레트로 픽셀 감성에 파스텔 네온을 더한 BI와 세계관을 설계하고, 픽셀 커서와 호버 인터랙션으로 캐릭터의 개성을 사이트 전체에 입혔습니다.</p>
-      <ul class="tags"><li>캐릭터 IP</li><li>레트로 픽셀</li><li>인터랙션</li></ul>
-      <div class="foot"><span class="state">제작 중</span><a class="cta" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">→</span></a></div>
+      <ul class="tags"><li>캐릭터 경험 설계</li><li>브랜드 확장 구조</li><li>인터랙션</li></ul>
+      <div class="foot"><span class="state">제작 중 · 재작업 예정</span><a class="cta" href="case/pixelink.html" data-case="pixelink">CASE STUDY <span aria-hidden="true">→</span></a><a class="cta ghost" href="https://pixel-neon-linked.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a></div>
+      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
     </div>
+    <div class="lays">
+<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><img src="build/pixelink/pixelink_01_plan.webp" alt="PIXELINK 01 PLAN — 기획·무드보드" loading="lazy"></figure>
+<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><img src="build/pixelink/pixelink_02_structure.webp" alt="PIXELINK 02 STRUCTURE — 와이어프레임" loading="lazy"></figure>
+<figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><img src="build/pixelink/pixelink_03_visual.webp" alt="PIXELINK 03 VISUAL — 이전 버전 화면" loading="lazy"></figure>
+<figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><video src="build/pixelink/pixelink_04_live.mp4" poster="build/pixelink/pixelink_04_live.webp" autoplay muted loop playsinline preload="metadata" aria-label="PIXELINK 04 LIVE — 첫 화면 스크롤 영상"></video></figure>
+    </div>
+    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n on" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n" href="#p4" aria-label="PROJECT 04">04</a></nav>
+    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
   </div>
 </section>
 
-<!-- ============== PROJECT 03 · VORTEXFALL ============== -->
-<section class="proj" id="p3" data-ch="3">
-  <div class="proj-in">
-    <div class="num" aria-hidden="true">03</div>
+<!-- ============== PROJECT 03 · BUILD TRACK ============== -->
+<section class="track" id="p3" data-ch="3">
+  <div class="stage">
     <div class="copy">
       <div class="row"><span class="chip">PROJECT 03</span><span class="cat">게임 IP · 시네마틱</span></div>
       <h3 class="ttl" data-split>VORTEXFALL</h3>
-      <p class="tag">오리지널 SF 판타지 게임 IP 및 브랜드 쇼케이스</p>
+      <p class="tag">낯선 세계관을 글로 설명하는 대신, 직접 비교하고 조작하며 이해하는 원페이지 런칭 흐름으로 설계</p>
       <p class="desc">차원 균열로 분리된 두 세계와 인공 생명체 카엘을 중심으로, 세계관·원초 에너지·캐릭터·게임 시스템을 시네마틱 원페이지 웹사이트로 구현한 오리지널 게임 IP 프로젝트.</p>
-      <ul class="tags"><li>게임 IP</li><li>시네마틱 트레일러</li><li>원페이지</li></ul>
+      <ul class="tags"><li>체험형 스토리텔링</li><li>원페이지 흐름 설계</li><li>직접 조작 UI</li></ul>
       <div class="foot"><span class="state">제작 중</span><a class="cta" href="case/vortexfall.html" data-case="vortexfall">CASE STUDY <span aria-hidden="true">→</span></a><a class="cta ghost" href="https://vortexfall.vercel.app" target="_blank" rel="noopener">사이트 보기 <span aria-hidden="true">↗</span></a></div>
+      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
+    </div>
+    <div class="lays">
+<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><img src="build/vortexfall/vortexfall_01_plan.webp" alt="VORTEXFALL 01 PLAN — 기획·무드보드" loading="lazy"></figure>
+<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><img src="build/vortexfall/vortexfall_02_structure.webp" alt="VORTEXFALL 02 STRUCTURE — 현재 사이트 와이어프레임" loading="lazy"></figure>
+<figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><img src="build/vortexfall/vortexfall_03_visual.webp" alt="VORTEXFALL 03 VISUAL — 이전 버전 화면" loading="lazy"></figure>
+<figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><video src="build/vortexfall/vortexfall_04_live.mp4" poster="build/vortexfall/vortexfall_04_live.webp" autoplay muted loop playsinline preload="metadata" aria-label="VORTEXFALL 04 LIVE — 첫 화면 스크롤 영상"></video></figure>
+    </div>
+    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n on" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n" href="#p4" aria-label="PROJECT 04">04</a></nav>
+    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
+  </div>
+</section>
+
+<!-- ============== PROJECT 04 · BUILD TRACK (WORK IN PROGRESS) ============== -->
+<section class="track" id="p4" data-ch="4">
+  <div class="stage">
+    <div class="copy">
+      <div class="row"><span class="chip">PROJECT 04</span><span class="cat">스페이스 라이프스타일 · 서비스 웹</span></div>
+      <h3 class="ttl" data-split>GYEOL</h3>
+      <p class="slogan">SPACE, IN YOUR TONE.</p>
+      <p class="tag">개인의 취향에 맞춰 공간의 컬러와 마감재를 제안하는 스페이스 라이프스타일 브랜드</p>
+      <p class="desc">브랜딩과 서비스 기획 및 디자인 진행 중입니다. 컬러와 소재를 고르고, 공간에 적용해 보고, 예상 비용을 확인한 뒤 상담까지 이어지는 서비스형 웹으로 기획하고 있어요.</p>
+      <ul class="tags"><li>컬러 커스터마이저</li><li>공간 시뮬레이터</li><li>견적 계산</li></ul>
+      <div class="foot"><span class="state">WORK IN PROGRESS</span><span class="cta soon">CASE STUDY (추후)</span></div>
+      <p class="nb"><span class="nb-k">NOW BUILDING ▸</span> <b class="nb-s">SKETCH</b> <span class="nb-d">무드와 구조를 스케치</span></p>
+    </div>
+    <div class="lays">
+<figure class="lay" data-stage="0" style="--sx:-260;--sy:-120;--sr:-10;--z:1"><figcaption class="lay-tag">01 SKETCH</figcaption><div class="lay-ph" aria-hidden="true">SKETCH 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="1" style="--sx:220;--sy:-150;--sr:8;--z:2"><figcaption class="lay-tag">02 WIRE</figcaption><div class="lay-ph" aria-hidden="true">WIRE 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="2" style="--sx:-200;--sy:160;--sr:6;--z:3"><figcaption class="lay-tag">03 VISUAL</figcaption><div class="lay-ph" aria-hidden="true">VISUAL 이미지 자리 · 가로 16:10</div></figure>
+<figure class="lay" data-stage="3" style="--sx:240;--sy:140;--sr:-8;--z:4"><figcaption class="lay-tag">04 LIVE</figcaption><div class="lay-ph" aria-hidden="true">LIVE 이미지 자리 · 가로 16:10</div></figure>
+    </div>
+    <nav class="dial" aria-label="프로젝트 이동"><a class="dial-n" href="#p1" aria-label="PROJECT 01">01</a><a class="dial-n" href="#p2" aria-label="PROJECT 02">02</a><a class="dial-n" href="#p3" aria-label="PROJECT 03">03</a><a class="dial-n on" href="#p4" aria-label="PROJECT 04">04</a></nav>
+    <div class="ruler" aria-hidden="true"><div class="rbar"><i></i></div><div class="rlabels"><span>0% SKETCH</span><span>33% WIRE</span><span>66% VISUAL</span><span>100% LIVE</span></div></div>
+  </div>
+</section>
+
+<!-- ============== MORE WORKS ============== -->
+<section class="more" id="more" aria-labelledby="moreTtl">
+  <div class="wrap">
+    <span class="eyebrow">MORE WORKS</span>
+    <h2 class="more-ttl" id="moreTtl">그 밖의 작업</h2>
+    <div class="more-strips">
+<article class="strip open" tabindex="0" aria-label="향수"><span class="s-num">04</span><b class="s-title">향수</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
+<article class="strip" tabindex="0" aria-label="영화"><span class="s-num">05</span><b class="s-title">영화</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
+<article class="strip" tabindex="0" aria-label="카페 브랜딩"><span class="s-num">06</span><b class="s-title">카페 브랜딩</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
+<article class="strip" tabindex="0" aria-label="뷰티 → 건축 리브랜딩"><span class="s-num">07</span><b class="s-title">뷰티 → 건축 리브랜딩</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
+<article class="strip" tabindex="0" aria-label="BIGBANG 20주년 굿즈"><span class="s-num">08</span><b class="s-title">BIGBANG 20주년 굿즈</b><div class="s-body"><div class="s-ph" aria-hidden="true">이미지 자리 · 가로 16:10</div><p class="s-desc">한 줄 소개 (추후)</p><span class="cta soon">CASE STUDY (추후)</span></div></article>
     </div>
   </div>
 </section>
@@ -475,11 +619,11 @@ footer{position:relative;z-index:2;padding:56px max(24px,env(safe-area-inset-lef
       <h2>Visual Systems Builder,<br>논리적 설계에서 인터랙션까지.</h2>
       <p class="lead">N 성향을 가진 설계형 ESTP 창작자 miint.s0da입니다. 아이디어를 시각 언어로 구체화하고, 코드로 생명력을 불어넣는 5단계 프로세스로 작업합니다.</p>
       <ul class="steps">
-        <li><small>01</small><b>IDEA</b></li>
-        <li><small>02</small><b>STRUCTURE</b></li>
-        <li><small>03</small><b>VISUAL</b></li>
-        <li><small>04</small><b>DETAIL</b></li>
-        <li><small>05</small><b>RESULT</b></li>
+        <li><small>01</small><b>IDEA</b><em>(추후)</em></li>
+        <li><small>02</small><b>STRUCTURE</b><em>UNI+ON 사용자 흐름</em></li>
+        <li><small>03</small><b>VISUAL</b><em>VORTEXFALL AI 파이프라인</em></li>
+        <li><small>04</small><b>DETAIL</b><em>(추후)</em></li>
+        <li><small>05</small><b>RESULT</b><em>(추후)</em></li>
       </ul>
     </div>
     <div class="box">
@@ -2455,6 +2599,67 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[data-cas
 addEventListener('message',function(e){if(e.data&&e.data.type==='case-close')close()});
 addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)close()});
 var m=location.hash.match(/^#case\/([\w-]+)$/);if(m)open(m[1],true);})();
+</script>
+<script>
+/* BUILD TRACK 진행도: 스크롤 위치 → --k(0~1) → 단계(SKETCH/WIRE/VISUAL/LIVE) */
+(() => {
+  const tracks = [...document.querySelectorAll('.track')];
+  const NAMES = ['SKETCH','WIRE','VISUAL','LIVE'];
+  const DESCS = ['무드와 구조를 스케치','화면 흐름을 와이어로 정리','그래픽과 시안 적용','실제 사이트로 구현'];
+  const desk = () => matchMedia('(min-width: 820px) and (prefers-reduced-motion: no-preference)').matches;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const stageOf = k => k < .33 ? 0 : k < .66 ? 1 : k < .999 ? 2 : 3;
+  tracks.forEach(t => { t._idx = -1; });
+  function update() {
+    const on = desk();
+    tracks.forEach(t => {
+      const range = t.offsetHeight - innerHeight;
+      const k = on && range > 0 ? Math.min(1, Math.max(0, -t.getBoundingClientRect().top / range)) : 1;
+      t.style.setProperty('--k', k.toFixed(4));
+      t.style.setProperty('--f', clamp((k - .5) / .5, 0, 1).toFixed(3));
+      t.querySelector('.rbar i') && (t.querySelector('.rbar i').style.width = (k * 100).toFixed(2) + '%');
+      const idx = stageOf(k);
+      if (idx !== t._idx) {
+        t._idx = idx;
+        t.querySelectorAll('.lay').forEach((l, n) => l.classList.toggle('on', n === idx));
+        t.querySelector('.nb-s').textContent = NAMES[idx];
+        t.querySelector('.nb-d').textContent = DESCS[idx];
+      }
+    });
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();
+</script>
+<script>
+/* MORE WORKS: 탭/클릭으로 띠 펼치기 (데스크톱 호버와 함께) */
+document.querySelectorAll('.strip').forEach(s => s.addEventListener('click', () => {
+  if (matchMedia('(max-width: 819px)').matches) return;
+  document.querySelectorAll('.strip.open').forEach(o => { if (o !== s) o.classList.remove('open'); });
+  s.classList.toggle('open');
+}));
+</script>
+<script>
+/* 섹션 전면교체: 떠다니는 도형은 히어로에서만 보이고, 프로젝트·MORE·PROCESS 구간에서는 사라짐 */
+(() => {
+  const LB = document.getElementById('LB'), LF = document.getElementById('LF');
+  const hero = document.getElementById('hero');
+  const sym6 = document.getElementById('sym6');
+  let raf = 0;
+  function fade() {
+    raf = 0;
+    const end = hero ? hero.offsetHeight * 0.55 : innerHeight * 0.5;
+    const o = Math.min(1, Math.max(0, 1 - (scrollY - end * 0.6) / (end * 0.4)));
+    const v = o.toFixed(3);
+    if (LB) LB.style.opacity = v;
+    if (LF) LF.style.opacity = v;
+    if (sym6) sym6.style.opacity = v;
+  }
+  addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(fade); }, { passive: true });
+  addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(fade); });
+  fade();
+})();
 </script>
 </body>
 </html>
